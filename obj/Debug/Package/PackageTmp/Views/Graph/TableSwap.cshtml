@@ -1,0 +1,206 @@
+﻿@{
+    ViewBag.Title = "TableSwap";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Meterid = ViewBag.id;
+    var Fdate = ViewBag.fd;
+    var Tdate = ViewBag.td;
+    var MeterName = ViewBag.MeterName;
+}
+<link href="~/Content/css/Table.css" rel="stylesheet" />
+<div class="heading">
+    <h1>PSA | <span style="color:darkred">@Html.Raw(MeterName)</span> DATA | <span style="color:darkred;">@DateTime.Now</span></h1>
+</div>
+<main class="table" id="customers_table">
+    @*<section class="table__header">
+            <div class="col-lg-6"></div>
+            <div class="input-group" style="background-color:lightblue;">
+                <input type="search" placeholder="Search Data..." />
+                <img src="~/Content/assets/images/search.png" alt="#" style="background-color:aquamarine;" />
+            </div>
+            <div class="export__file">
+                <label for="export-file" id="toCSV"><img src="~/Content/assets/images/excel.png" alt="" style="height:40px;"></label>
+                <label for="export-file" style="background-color:white;border-radius:5px;" title="Export File"><i class="fa fa-file-excel-o" style="font-size:36px;color:forestgreen"></i></label>
+                <input type="checkbox" id="export-file">
+                <div class="export__file-options">
+                    <label>Export As &nbsp; &#10140;</label>
+                    <label for="export-file" id="toCSV">EXCEL  <img src="~/Content/assets/images/excel.png" alt=""></label>
+                </div>
+            </div>
+        </section>*@
+    <br />
+    <br />
+    <section class="table__body">
+        <table id="dataTable" style="background-color:lightgray" class="display">
+            <thead>
+                <tr>
+                    <th>METER</th>
+                    <th>DATEANDTIME</th>
+                    <th>ACTIVE_ENERGY</th>
+                    <th>CONSUMPTION</th>
+                    <th>RY_CURRENT</th>
+                    <th>YB_CURRENT</th>
+                    <th>BR_CURRENT</th>
+                    <th>RY_VOLTAGE</th>
+                    <th>YB_VOLTAGE</th>
+                    <th>BR_VOLTAGE</th>
+                    <th>MAX_DEMAND</th>
+                    <th>POWER_FACTOR</th>
+                    <th><label for="export-file" id="toCSV"><img src="~/Content/assets/images/excel.png" alt="" style="height:30px;" title="Export File"></label></th>
+                </tr>
+            </thead>
+            <tbody>
+                @* Binding From Function DownSide. *@
+            </tbody>
+        </table>
+    </section>
+</main>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
+<script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+<link href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" rel="stylesheet" />
+<script>
+        window.onload = function () {
+            debugger;
+            var id = '@Html.Raw(Meterid)';
+            var fdt = '@Html.Raw(Fdate)';
+            var tdt = '@Html.Raw(Tdate)';
+            LoadTableData(id, fdt, tdt);
+        }
+
+        function LoadTableData(strMId, strFDate, strTDate) {
+            debugger;
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetTableData", "Graph")',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ strId: strMId, strFD: strFDate, strTD: strTDate }),
+                success: function (response) {
+                    if (response) {
+                        const tableBody = document.querySelector('#dataTable tbody');
+                        tableBody.innerHTML = '';
+                        debugger;
+                        for (let i = 0; i < response.Consumption.length; i++) {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `<tr>
+                                        <td>${response.MeterName[i]}</td>
+                                        <td>${response.DateAndTime[i]}</td>
+                                        <td>${response.ActiveEnergy[i]}</td>
+                                        <td>${response.Consumption[i]}</td>
+                                        <td>${response.Current_A[i]}</td>
+                                        <td>${response.Current_B[i]}</td>
+                                        <td>${response.Current_C[i]}</td>
+                                        <td>${response.Voltage_A[i]}</td>
+                                        <td>${response.Voltage_B[i]}</td>
+                                        <td>${response.Voltage_C[i]}</td>
+                                        <td>${response.MaxDemand[i]}</td>
+                                        <td>${response.PowerFactor[i]}</td>                                                                                
+                                    </tr>`;
+                            tableBody.appendChild(row);
+                        }
+                    }
+                    else {
+                        alert('No Data Found.' + response);
+                    }
+                },
+                error: function (err) {
+                    alert('Error : ' + err);
+                }
+            });
+        }
+       // new DataTable('#dataTable');
+
+        /* DEFAULT SCRIPTS FUNCTIONS */
+        const search = document.querySelector('.input-group input'),
+            table_rows = document.querySelectorAll('tbody tr'),
+            table_headings = document.querySelectorAll('thead th');
+        // 1. Searching for specific data of HTML table
+        //search.addEventListener('input', searchTable);
+        //function searchTable() {
+        //    table_rows.forEach((row, i) => {
+        //        let table_data = row.textContent.toLowerCase(),
+        //            search_data = search.value.toLowerCase();
+        //        row.classList.toggle('hide', table_data.indexOf(search_data) < 0);
+        //        row.style.setProperty('--delay', i / 25 + 's');
+        //    })
+        //    document.querySelectorAll('tbody tr:not(.hide)').forEach((visible_row, i) => {
+        //        visible_row.style.backgroundColor = (i % 2 == 0) ? 'transparent' : '#0000000b';
+        //    });
+        //}
+        // 2. Sorting | Ordering data of HTML table
+        //table_headings.forEach((head, i) => {
+        //    let sort_asc = true;
+        //    head.onclick = () => {
+        //        table_headings.forEach(head => head.classList.remove('active'));
+        //        head.classList.add('active');
+        //        document.querySelectorAll('td').forEach(td => td.classList.remove('active'));
+        //        table_rows.forEach(row => {
+        //            row.querySelectorAll('td')[i].classList.add('active');
+        //        })
+        //        head.classList.toggle('asc', sort_asc);
+        //        sort_asc = head.classList.contains('asc') ? false : true;
+        //        sortTable(i, sort_asc);
+        //    }
+        //})
+        //function sortTable(column, sort_asc) {
+        //    [...table_rows].sort((a, b) => {
+        //        let first_row = a.querySelectorAll('td')[column].textContent.toLowerCase(),
+        //            second_row = b.querySelectorAll('td')[column].textContent.toLowerCase();
+        //        return sort_asc ? (first_row < second_row ? 1 : -1) : (first_row < second_row ? -1 : 1);
+        //    })
+        //        .map(sorted_row => document.querySelector('tbody').appendChild(sorted_row));
+        //}
+        // 3. Converting HTML table to CSV File
+        @*const csv_btn = document.querySelector('#toCSV');
+        const toCSV = function (table) {
+            const t_heads = table.querySelectorAll('th'),
+                tbody_rows = table.querySelectorAll('tbody tr');
+            // Capture and format headings
+            const headings = [...t_heads].map(head => head.textContent.trim().toUpperCase()).join(',');
+            // Capture and format table data
+            const table_data = [...tbody_rows].map(row => {
+                const cells = row.querySelectorAll('td');
+                const cells_data = [...cells].map(cell => cell.textContent.trim()).join(',');
+                return cells_data;
+            }).join('\n');
+            return headings + '\n' + table_data;
+        }
+        const downloadFile1 = (data, fileType, fileName) => {
+            const blob = new Blob([data], { type: `text/${fileType}` });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `${fileName}.${fileType}`;
+            link.click();
+        }
+        csv_btn.onclick = () => {
+            const table = document.getElementById('dataTable');
+            const csv = toCSV(table);
+            downloadFile1(csv, 'xlsx', '@Html.Raw(MeterName)');
+            //downloadFile(csv, 'csv', 'customer orders');
+        }*@
+        const csv_btn = document.querySelector('#toCSV');
+    const toCSV = function (table) {
+        const t_heads = table.querySelectorAll('th'),
+            tbody_rows = table.querySelectorAll('tbody tr');
+        // Capture and format headings
+        const headings = [...t_heads].map(head => head.textContent.trim().toUpperCase());
+        // Capture and format table data
+        const table_data = [...tbody_rows].map(row => {
+            const cells = row.querySelectorAll('td');
+            const cells_data = [...cells].map(cell => cell.textContent.trim());
+            return cells_data;
+        });
+        return [headings, ...table_data];
+    }
+    const downloadXLSX = (data, fileName) => {
+        const ws = XLSX.utils.aoa_to_sheet(data);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, '@Html.Raw(MeterName)');
+        XLSX.writeFile(wb, `${fileName}.xlsx`);
+    }
+    csv_btn.onclick = () => {
+        const table = document.getElementById('dataTable');
+        const data = toCSV(table);
+        downloadXLSX(data, '@Html.Raw(MeterName)');
+    }
+</script>

@@ -1,0 +1,158 @@
+﻿@{
+    ViewBag.Title = "TABLE VIEW";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var groupId = ViewBag.GroupId;
+    var groupName = ViewBag.groupName;
+    var FDate = ViewBag.FromDate;
+    var TDate = ViewBag.ToDate;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Grid</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: darkblue;
+        }
+
+        .container {
+            margin:10px auto;
+            width:100%;
+            align-content:center;
+        }
+
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+            width: 108%;
+            table-layout: fixed;
+        }
+
+        th, td {
+            padding: 8px 12px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        th {
+            background-color: #88c0d3;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        tbody {
+            display: block;
+            height: 578px; /* Set the height for the scrollable area */
+            width: 1195px;
+            overflow-y: auto;
+        }
+
+            tbody tr {
+                display: table;
+                width: 100%;
+                table-layout: fixed;
+            }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #b9d6b9;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #ffffff;
+        }
+
+        .heading {
+            border: 1px solid;
+            background-color: #E3F2FD;
+            color: dodgerblue;
+            border-radius: 10px;
+            font-size: 50px;
+            font-family: Arial;
+            font-weight: bold;
+            text-align: center;
+            width: 100%;
+            padding:10px 5px; /*10px 50px;  Adjust padding for better spacing */
+            margin: 0px auto 20px auto; /* Center the heading and add margin at the bottom */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="heading">
+        <h1>PSA | <span style="color:darkred">@Html.Raw(groupName)</span> DATA | <span style="color:darkred;">@DateTime.Now</span></h1>
+    </div>
+
+    <div class="container">
+        <table id="dataGrid">
+            <thead>
+                <tr>
+                    <th>METERNAME</th>
+                    <th>SYNCDATETIME</th>
+                    <th>MAX DEMAND</th>
+                    <th>POWER FACTOR</th>
+                    <th>ACTIVE ENERGY DELIVERED</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data rows will be appended here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+    window.onload = function () {
+        var groupId = '@Html.Raw(groupId)';
+        var FrDate = '@Html.Raw(FDate)';
+        var TooDate = '@Html.Raw(TDate)';
+        LoadGridData(groupId, FrDate, TooDate);
+    }
+
+    function LoadGridData(grupId, FromDate, ToDate) {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("GetTableData", "Home")',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ strGroupId: grupId, strFromDate: FromDate, strToDate: ToDate }),
+            success: function (response) {
+                if (response) {
+                    var tbody = document.getElementById('dataGrid').getElementsByTagName('tbody')[0];
+                    tbody.innerHTML = ""; // Clear existing rows
+                    for (var i = 0; i < response.MaxDemand.length; i++) {
+                        var row = tbody.insertRow();
+                        row.insertCell(0).innerHTML = response.MeterName[i];
+                        row.insertCell(1).innerHTML = response.SYNCDATETIME[i];
+                        row.insertCell(2).innerHTML = response.MaxDemand[i];
+                        row.insertCell(3).innerHTML = response.PowerFactor[i];
+                        row.insertCell(4).innerHTML = response.ActiveEnergy[i];
+                    }
+                } else {
+                    alert('No data found');
+                }
+            },
+            error: function (err) {
+                alert('Error : ' + err);
+            }
+        });
+    }
+    </script>
+
+</body>
+
+</html>

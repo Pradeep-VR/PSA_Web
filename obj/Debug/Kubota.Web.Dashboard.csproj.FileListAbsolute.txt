@@ -1,0 +1,224 @@
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\Kubota.Web.Dashboard.dll.config
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\Kubota.Web.Dashboard.dll
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\Kubota.Web.Dashboard.pdb
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\roslyn\csc.exe
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\roslyn\csc.exe.config
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\roslyn\csc.rsp
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\roslyn\csi.exe
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\roslyn\csi.rsp
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\roslyn\System.AppContext.dll
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\roslyn\vbc.exe
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\roslyn\vbc.exe.config
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\roslyn\vbc.rsp
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\roslyn\VBCSCompiler.exe
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\Antlr3.Runtime.dll
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\Newtonsoft.Json.dll
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\System.Web.Helpers.dll
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\System.Web.Mvc.dll
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\System.Web.Optimization.dll
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\System.Web.Razor.dll
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\System.Web.WebPages.dll
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\System.Web.WebPages.Razor.dll
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\WebGrease.dll
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\System.Web.Helpers.xml
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\System.Web.Mvc.xml
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\System.Web.Optimization.xml
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\System.Web.Razor.xml
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\System.Web.WebPages.xml
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\System.Web.WebPages.Razor.xml
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\Newtonsoft.Json.xml
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\Antlr3.Runtime.pdb
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\obj\Debug\Kubota.Web.Dashboard.csproj.AssemblyReference.cache
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\obj\Debug\Kubota.Web.Dashboard.csproj.CoreCompileInputs.cache
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\obj\Debug\Kubota.Web.Dashboard.csproj.CopyComplete
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\obj\Debug\Kubota.Web.Dashboard.dll
+C:\Users\Muthazagan R\source\repos\Kubota.Web.Dashboard\obj\Debug\Kubota.Web.Dashboard.pdb
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\Kubota.Web.Dashboard.dll.config
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\Kubota.Web.Dashboard.dll
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\Kubota.Web.Dashboard.pdb
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\roslyn\csc.exe
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\roslyn\csc.exe.config
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\roslyn\csc.rsp
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\roslyn\csi.exe
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\roslyn\csi.rsp
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\roslyn\System.AppContext.dll
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\roslyn\System.Collections.Immutable.dll
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\roslyn\System.Diagnostics.StackTrace.dll
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\roslyn\System.IO.FileSystem.dll
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\roslyn\System.IO.FileSystem.Primitives.dll
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\roslyn\System.Reflection.Metadata.dll
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\roslyn\vbc.exe
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\roslyn\vbc.exe.config
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\roslyn\vbc.rsp
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\roslyn\VBCSCompiler.exe
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\roslyn\VBCSCompiler.exe.config
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\Antlr3.Runtime.dll
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\Microsoft.Web.Infrastructure.dll
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\Newtonsoft.Json.dll
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\System.Web.Helpers.dll
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\System.Web.Mvc.dll
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\System.Web.Optimization.dll
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\System.Web.Razor.dll
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\System.Web.WebPages.Deployment.dll
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\System.Web.WebPages.dll
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\System.Web.WebPages.Razor.dll
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\WebGrease.dll
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\System.Web.Helpers.xml
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\System.Web.Mvc.xml
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\System.Web.Optimization.xml
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\System.Web.Razor.xml
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\System.Web.WebPages.xml
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\System.Web.WebPages.Deployment.xml
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\System.Web.WebPages.Razor.xml
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\Newtonsoft.Json.xml
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\Antlr3.Runtime.pdb
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\obj\Debug\Kubota.Web.Dashboard.csproj.AssemblyReference.cache
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\obj\Debug\Kubota.Web.Dashboard.csproj.CoreCompileInputs.cache
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\obj\Debug\Kubota.Web.Dashboard.csproj.CopyComplete
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\obj\Debug\Kubota.Web.Dashboard.dll
+D:\Ganesh\Kubato_live\live\Dashboard\Kubota.Web.Dashboard\obj\Debug\Kubota.Web.Dashboard.pdb
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\Kubota.Web.Dashboard.dll.config
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\Kubota.Web.Dashboard.dll
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\Kubota.Web.Dashboard.pdb
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\roslyn\csc.exe
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\roslyn\csc.exe.config
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\roslyn\csc.rsp
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\roslyn\csi.exe
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\roslyn\csi.rsp
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\roslyn\System.AppContext.dll
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\roslyn\System.Collections.Immutable.dll
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\roslyn\System.Diagnostics.StackTrace.dll
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\roslyn\System.IO.FileSystem.dll
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\roslyn\System.IO.FileSystem.Primitives.dll
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\roslyn\System.Reflection.Metadata.dll
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\roslyn\vbc.exe
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\roslyn\vbc.exe.config
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\roslyn\vbc.rsp
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\roslyn\VBCSCompiler.exe
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\roslyn\VBCSCompiler.exe.config
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\Antlr3.Runtime.dll
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\Microsoft.Web.Infrastructure.dll
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\Newtonsoft.Json.dll
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\System.Web.Helpers.dll
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\System.Web.Mvc.dll
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\System.Web.Optimization.dll
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\System.Web.Razor.dll
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\System.Web.WebPages.Deployment.dll
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\System.Web.WebPages.dll
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\System.Web.WebPages.Razor.dll
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\WebGrease.dll
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\System.Web.Helpers.xml
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\System.Web.Mvc.xml
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\System.Web.Optimization.xml
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\System.Web.Razor.xml
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\System.Web.WebPages.xml
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\System.Web.WebPages.Deployment.xml
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\System.Web.WebPages.Razor.xml
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\Newtonsoft.Json.xml
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\Antlr3.Runtime.pdb
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\obj\Debug\Kubota.Web.Dashboard.csproj.AssemblyReference.cache
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\obj\Debug\Kubota.Web.Dashboard.csproj.CoreCompileInputs.cache
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\obj\Debug\Kubota.Web.Dashboard.csproj.CopyComplete
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\obj\Debug\Kubota.Web.Dashboard.dll
+D:\PSA\Dashboard\Dashboard\Kubota.Web.Dashboard\obj\Debug\Kubota.Web.Dashboard.pdb
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\Kubota.Web.Dashboard.dll.config
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\Kubota.Web.Dashboard.dll
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\Kubota.Web.Dashboard.pdb
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\roslyn\csc.exe
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\roslyn\csc.exe.config
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\roslyn\csc.rsp
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\roslyn\csi.exe
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\roslyn\csi.rsp
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\roslyn\System.AppContext.dll
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\roslyn\System.Collections.Immutable.dll
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\roslyn\System.Diagnostics.StackTrace.dll
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\roslyn\System.IO.FileSystem.dll
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\roslyn\System.IO.FileSystem.Primitives.dll
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\roslyn\System.Reflection.Metadata.dll
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\roslyn\vbc.exe
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\roslyn\vbc.exe.config
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\roslyn\vbc.rsp
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\roslyn\VBCSCompiler.exe
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\roslyn\VBCSCompiler.exe.config
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\Antlr3.Runtime.dll
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\Microsoft.Web.Infrastructure.dll
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\Newtonsoft.Json.dll
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\System.Web.Helpers.dll
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\System.Web.Mvc.dll
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\System.Web.Optimization.dll
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\System.Web.Razor.dll
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\System.Web.WebPages.Deployment.dll
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\System.Web.WebPages.dll
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\System.Web.WebPages.Razor.dll
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\WebGrease.dll
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\System.Web.Helpers.xml
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\System.Web.Mvc.xml
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\System.Web.Optimization.xml
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\System.Web.Razor.xml
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\System.Web.WebPages.xml
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\System.Web.WebPages.Deployment.xml
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\System.Web.WebPages.Razor.xml
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\Newtonsoft.Json.xml
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\Antlr3.Runtime.pdb
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\obj\Debug\Kubota.Web.Dashboard.csproj.AssemblyReference.cache
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\obj\Debug\Kubota.Web.Dashboard.csproj.CoreCompileInputs.cache
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\obj\Debug\Kubota.Web.Dashboard.csproj.CopyComplete
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\obj\Debug\Kubota.Web.Dashboard.dll
+D:\PSA\16-05-2024\Dashboard\Kubota.Web.Dashboard\obj\Debug\Kubota.Web.Dashboard.pdb

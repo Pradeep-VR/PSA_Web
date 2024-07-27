@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PSA_PLC_STATIONSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="GROUPMASTER">
+    <Key>
+      <PropertyRef Name="GROUPID" />
+    </Key>
+    <Property Name="GROUPID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GROUPNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FLAG" Type="Boolean" />
+    <Property Name="CREATEDBY" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CREATEDDATE" Type="DateTime" Precision="3" />
+    <Property Name="UPDATEDBY" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="UPDATEDDATE" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="TBL_ENERGYMETER" Relationship="Self.FK_EM_GROUPID" FromRole="GROUPMASTER" ToRole="TBL_ENERGYMETER" />
+    <NavigationProperty Name="METERMASTERs" Relationship="Self.FK_GROUPID" FromRole="GROUPMASTER" ToRole="METERMASTER" />
+  </EntityType>
+  <EntityType Name="METERMASTER">
+    <Key>
+      <PropertyRef Name="METERID" />
+    </Key>
+    <Property Name="METERID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="METERNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GROUPID" Type="Int32" />
+    <Property Name="FLAG" Type="Boolean" />
+    <Property Name="CREATEDBY" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CREATEDDATE" Type="DateTime" Precision="3" />
+    <Property Name="UPDATEDBY" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="UPDATEDDATE" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="GROUPMASTER" Relationship="Self.FK_GROUPID" FromRole="METERMASTER" ToRole="GROUPMASTER" />
+    <NavigationProperty Name="TBL_ENERGYMETER" Relationship="Self.FK_EM_METERID" FromRole="METERMASTER" ToRole="TBL_ENERGYMETER" />
+  </EntityType>
+  <EntityType Name="UserMaster">
+    <Key>
+      <PropertyRef Name="User_ID" />
+    </Key>
+    <Property Name="User_ID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="User_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phone_Number" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Attribute1" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Attribute2" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Attribute3" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Attribute4" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Attribute5" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="TBL_ENERGYMETER">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="STATIONS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="METERID" Type="Int32" />
+    <Property Name="GROUPID" Type="Int32" />
+    <Property Name="CURRENTA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CURRENTB" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CURRENTC" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="VOLTAGEAB" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="VOLTAGEBC" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="VOLTAGECA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="VOLTAGELL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="VOLTAGEAN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="VOLTAGEBN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="VOLTAGECN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="VOLTAGELN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MAXDEMAND" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="POWERFACTOR" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ACTIVEENERGYDELIVERED" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="SYNCDATETIME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="GROUPMASTER" Relationship="Self.FK_EM_GROUPID" FromRole="TBL_ENERGYMETER" ToRole="GROUPMASTER" />
+    <NavigationProperty Name="METERMASTER" Relationship="Self.FK_EM_METERID" FromRole="TBL_ENERGYMETER" ToRole="METERMASTER" />
+  </EntityType>
+  <EntityType Name="tbl_Test">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Flag" Type="Boolean" />
+  </EntityType>
+  <Association Name="FK_EM_GROUPID">
+    <End Role="GROUPMASTER" Type="Self.GROUPMASTER" Multiplicity="0..1" />
+    <End Role="TBL_ENERGYMETER" Type="Self.TBL_ENERGYMETER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GROUPMASTER">
+        <PropertyRef Name="GROUPID" />
+      </Principal>
+      <Dependent Role="TBL_ENERGYMETER">
+        <PropertyRef Name="GROUPID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GROUPID">
+    <End Role="GROUPMASTER" Type="Self.GROUPMASTER" Multiplicity="0..1" />
+    <End Role="METERMASTER" Type="Self.METERMASTER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GROUPMASTER">
+        <PropertyRef Name="GROUPID" />
+      </Principal>
+      <Dependent Role="METERMASTER">
+        <PropertyRef Name="GROUPID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EM_METERID">
+    <End Role="METERMASTER" Type="Self.METERMASTER" Multiplicity="0..1" />
+    <End Role="TBL_ENERGYMETER" Type="Self.TBL_ENERGYMETER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="METERMASTER">
+        <PropertyRef Name="METERID" />
+      </Principal>
+      <Dependent Role="TBL_ENERGYMETER">
+        <PropertyRef Name="METERID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PSA_PLC_STATIONSEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="GROUPMASTERs" EntityType="Self.GROUPMASTER" />
+    <EntitySet Name="METERMASTERs" EntityType="Self.METERMASTER" />
+    <EntitySet Name="UserMasters" EntityType="Self.UserMaster" />
+    <EntitySet Name="TBL_ENERGYMETER" EntityType="Self.TBL_ENERGYMETER" />
+    <EntitySet Name="tbl_Test" EntityType="Self.tbl_Test" />
+    <AssociationSet Name="FK_EM_GROUPID" Association="Self.FK_EM_GROUPID">
+      <End Role="GROUPMASTER" EntitySet="GROUPMASTERs" />
+      <End Role="TBL_ENERGYMETER" EntitySet="TBL_ENERGYMETER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GROUPID" Association="Self.FK_GROUPID">
+      <End Role="GROUPMASTER" EntitySet="GROUPMASTERs" />
+      <End Role="METERMASTER" EntitySet="METERMASTERs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EM_METERID" Association="Self.FK_EM_METERID">
+      <End Role="METERMASTER" EntitySet="METERMASTERs" />
+      <End Role="TBL_ENERGYMETER" EntitySet="TBL_ENERGYMETER" />
+    </AssociationSet>
+    <FunctionImport Name="BodyShopDataWithDate">
+      <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetBodyShopData" />
+    <FunctionImport Name="GetOverAllData" />
+    <FunctionImport Name="GetOverallDataWithDate">
+      <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetPaintShopData" />
+    <FunctionImport Name="GetTrnasformerWiseData" />
+    <FunctionImport Name="GetUtilitiesData" />
+    <FunctionImport Name="PaintShopDataWithDate">
+      <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="TestSP">
+      <Parameter Name="name" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+      <Parameter Name="flag" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="TrnasformerWiseDataWithDate">
+      <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="UtilitiesDataWithDate">
+      <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PSA_PLC_STATIONSModelStoreContainer" CdmEntityContainer="PSA_PLC_STATIONSEntities">
+    <EntitySetMapping Name="GROUPMASTERs">
+      <EntityTypeMapping TypeName="PSA_PLC_STATIONSModel.GROUPMASTER">
+        <MappingFragment StoreEntitySet="GROUPMASTER">
+          <ScalarProperty Name="GROUPID" ColumnName="GROUPID" />
+          <ScalarProperty Name="GROUPNAME" ColumnName="GROUPNAME" />
+          <ScalarProperty Name="FLAG" ColumnName="FLAG" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="UPDATEDBY" ColumnName="UPDATEDBY" />
+          <ScalarProperty Name="UPDATEDDATE" ColumnName="UPDATEDDATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="METERMASTERs">
+      <EntityTypeMapping TypeName="PSA_PLC_STATIONSModel.METERMASTER">
+        <MappingFragment StoreEntitySet="METERMASTER">
+          <ScalarProperty Name="METERID" ColumnName="METERID" />
+          <ScalarProperty Name="METERNAME" ColumnName="METERNAME" />
+          <ScalarProperty Name="GROUPID" ColumnName="GROUPID" />
+          <ScalarProperty Name="FLAG" ColumnName="FLAG" />
+          <ScalarProperty Name="CREATEDBY" ColumnName="CREATEDBY" />
+          <ScalarProperty Name="CREATEDDATE" ColumnName="CREATEDDATE" />
+          <ScalarProperty Name="UPDATEDBY" ColumnName="UPDATEDBY" />
+          <ScalarProperty Name="UPDATEDDATE" ColumnName="UPDATEDDATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserMasters">
+      <EntityTypeMapping TypeName="PSA_PLC_STATIONSModel.UserMaster">
+        <MappingFragment StoreEntitySet="UserMaster">
+          <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+          <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email_ID" ColumnName="Email_ID" />
+          <ScalarProperty Name="Phone_Number" ColumnName="Phone_Number" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Attribute1" ColumnName="Attribute1" />
+          <ScalarProperty Name="Attribute2" ColumnName="Attribute2" />
+          <ScalarProperty Name="Attribute3" ColumnName="Attribute3" />
+          <ScalarProperty Name="Attribute4" ColumnName="Attribute4" />
+          <ScalarProperty Name="Attribute5" ColumnName="Attribute5" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_ENERGYMETER">
+      <EntityTypeMapping TypeName="PSA_PLC_STATIONSModel.TBL_ENERGYMETER">
+        <MappingFragment StoreEntitySet="TBL_ENERGYMETER">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="STATIONS" ColumnName="STATIONS" />
+          <ScalarProperty Name="METERID" ColumnName="METERID" />
+          <ScalarProperty Name="GROUPID" ColumnName="GROUPID" />
+          <ScalarProperty Name="CURRENTA" ColumnName="CURRENTA" />
+          <ScalarProperty Name="CURRENTB" ColumnName="CURRENTB" />
+          <ScalarProperty Name="CURRENTC" ColumnName="CURRENTC" />
+          <ScalarProperty Name="VOLTAGEAB" ColumnName="VOLTAGEAB" />
+          <ScalarProperty Name="VOLTAGEBC" ColumnName="VOLTAGEBC" />
+          <ScalarProperty Name="VOLTAGECA" ColumnName="VOLTAGECA" />
+          <ScalarProperty Name="VOLTAGELL" ColumnName="VOLTAGELL" />
+          <ScalarProperty Name="VOLTAGEAN" ColumnName="VOLTAGEAN" />
+          <ScalarProperty Name="VOLTAGEBN" ColumnName="VOLTAGEBN" />
+          <ScalarProperty Name="VOLTAGECN" ColumnName="VOLTAGECN" />
+          <ScalarProperty Name="VOLTAGELN" ColumnName="VOLTAGELN" />
+          <ScalarProperty Name="MAXDEMAND" ColumnName="MAXDEMAND" />
+          <ScalarProperty Name="POWERFACTOR" ColumnName="POWERFACTOR" />
+          <ScalarProperty Name="ACTIVEENERGYDELIVERED" ColumnName="ACTIVEENERGYDELIVERED" />
+          <ScalarProperty Name="SYNCDATETIME" ColumnName="SYNCDATETIME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_Test">
+      <EntityTypeMapping TypeName="PSA_PLC_STATIONSModel.tbl_Test">
+        <MappingFragment StoreEntitySet="tbl_Test">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+          <ScalarProperty Name="Flag" ColumnName="Flag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="BodyShopDataWithDate" FunctionName="PSA_PLC_STATIONSModel.Store.BodyShopDataWithDate" />
+    <FunctionImportMapping FunctionImportName="GetBodyShopData" FunctionName="PSA_PLC_STATIONSModel.Store.GetBodyShopData" />
+    <FunctionImportMapping FunctionImportName="GetOverAllData" FunctionName="PSA_PLC_STATIONSModel.Store.GetOverAllData" />
+    <FunctionImportMapping FunctionImportName="GetOverallDataWithDate" FunctionName="PSA_PLC_STATIONSModel.Store.GetOverallDataWithDate" />
+    <FunctionImportMapping FunctionImportName="GetPaintShopData" FunctionName="PSA_PLC_STATIONSModel.Store.GetPaintShopData" />
+    <FunctionImportMapping FunctionImportName="GetTrnasformerWiseData" FunctionName="PSA_PLC_STATIONSModel.Store.GetTrnasformerWiseData" />
+    <FunctionImportMapping FunctionImportName="GetUtilitiesData" FunctionName="PSA_PLC_STATIONSModel.Store.GetUtilitiesData" />
+    <FunctionImportMapping FunctionImportName="PaintShopDataWithDate" FunctionName="PSA_PLC_STATIONSModel.Store.PaintShopDataWithDate" />
+    <FunctionImportMapping FunctionImportName="TestSP" FunctionName="PSA_PLC_STATIONSModel.Store.TestSP" />
+    <FunctionImportMapping FunctionImportName="TrnasformerWiseDataWithDate" FunctionName="PSA_PLC_STATIONSModel.Store.TrnasformerWiseDataWithDate" />
+    <FunctionImportMapping FunctionImportName="UtilitiesDataWithDate" FunctionName="PSA_PLC_STATIONSModel.Store.UtilitiesDataWithDate" />
+  </EntityContainerMapping>
+</Mapping>

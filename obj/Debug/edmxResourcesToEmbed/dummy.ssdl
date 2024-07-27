@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PSA_PLC_STATIONSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="GROUPMASTER">
+    <Key>
+      <PropertyRef Name="GROUPID" />
+    </Key>
+    <Property Name="GROUPID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GROUPNAME" Type="nvarchar" MaxLength="50" />
+    <Property Name="FLAG" Type="bit" />
+    <Property Name="CREATEDBY" Type="nvarchar" MaxLength="100" />
+    <Property Name="CREATEDDATE" Type="datetime" />
+    <Property Name="UPDATEDBY" Type="nvarchar" MaxLength="100" />
+    <Property Name="UPDATEDDATE" Type="datetime" />
+  </EntityType>
+  <EntityType Name="METERMASTER">
+    <Key>
+      <PropertyRef Name="METERID" />
+    </Key>
+    <Property Name="METERID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="METERNAME" Type="nvarchar" MaxLength="50" />
+    <Property Name="GROUPID" Type="int" />
+    <Property Name="FLAG" Type="bit" />
+    <Property Name="CREATEDBY" Type="nvarchar" MaxLength="100" />
+    <Property Name="CREATEDDATE" Type="datetime" />
+    <Property Name="UPDATEDBY" Type="nvarchar" MaxLength="100" />
+    <Property Name="UPDATEDDATE" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'PSA_PLC_STATIONS.dbo.TBL_ENERGYMETER' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="TBL_ENERGYMETER">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="STATIONS" Type="nvarchar" MaxLength="50" />
+    <Property Name="METERID" Type="int" />
+    <Property Name="GROUPID" Type="int" />
+    <Property Name="CURRENTA" Type="nvarchar" MaxLength="100" />
+    <Property Name="CURRENTB" Type="nvarchar" MaxLength="100" />
+    <Property Name="CURRENTC" Type="nvarchar" MaxLength="100" />
+    <Property Name="VOLTAGEAB" Type="nvarchar" MaxLength="100" />
+    <Property Name="VOLTAGEBC" Type="nvarchar" MaxLength="100" />
+    <Property Name="VOLTAGECA" Type="nvarchar" MaxLength="100" />
+    <Property Name="VOLTAGELL" Type="nvarchar" MaxLength="100" />
+    <Property Name="VOLTAGEAN" Type="nvarchar" MaxLength="100" />
+    <Property Name="VOLTAGEBN" Type="nvarchar" MaxLength="100" />
+    <Property Name="VOLTAGECN" Type="nvarchar" MaxLength="100" />
+    <Property Name="VOLTAGELN" Type="nvarchar" MaxLength="100" />
+    <Property Name="MAXDEMAND" Type="nvarchar" MaxLength="100" />
+    <Property Name="POWERFACTOR" Type="nvarchar" MaxLength="100" />
+    <Property Name="ACTIVEENERGYDELIVERED" Type="nvarchar" MaxLength="100" />
+    <Property Name="SYNCDATETIME" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'PSA_PLC_STATIONS.dbo.tbl_Test' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tbl_Test">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+    <Property Name="UserPassword" Type="nvarchar" MaxLength="50" />
+    <Property Name="Flag" Type="bit" />
+  </EntityType>
+  <EntityType Name="UserMaster">
+    <Key>
+      <PropertyRef Name="User_ID" />
+    </Key>
+    <Property Name="User_ID" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="User_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="20" />
+    <Property Name="Email_ID" Type="nvarchar" MaxLength="50" />
+    <Property Name="Phone_Number" Type="nvarchar" MaxLength="10" />
+    <Property Name="Status" Type="nvarchar" MaxLength="10" />
+    <Property Name="Attribute1" Type="nvarchar" MaxLength="30" />
+    <Property Name="Attribute2" Type="nvarchar" MaxLength="30" />
+    <Property Name="Attribute3" Type="nvarchar" MaxLength="30" />
+    <Property Name="Attribute4" Type="nvarchar" MaxLength="30" />
+    <Property Name="Attribute5" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <Association Name="FK_EM_GROUPID">
+    <End Role="GROUPMASTER" Type="Self.GROUPMASTER" Multiplicity="0..1" />
+    <End Role="TBL_ENERGYMETER" Type="Self.TBL_ENERGYMETER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GROUPMASTER">
+        <PropertyRef Name="GROUPID" />
+      </Principal>
+      <Dependent Role="TBL_ENERGYMETER">
+        <PropertyRef Name="GROUPID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EM_METERID">
+    <End Role="METERMASTER" Type="Self.METERMASTER" Multiplicity="0..1" />
+    <End Role="TBL_ENERGYMETER" Type="Self.TBL_ENERGYMETER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="METERMASTER">
+        <PropertyRef Name="METERID" />
+      </Principal>
+      <Dependent Role="TBL_ENERGYMETER">
+        <PropertyRef Name="METERID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GROUPID">
+    <End Role="GROUPMASTER" Type="Self.GROUPMASTER" Multiplicity="0..1" />
+    <End Role="METERMASTER" Type="Self.METERMASTER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GROUPMASTER">
+        <PropertyRef Name="GROUPID" />
+      </Principal>
+      <Dependent Role="METERMASTER">
+        <PropertyRef Name="GROUPID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="BodyShopDataWithDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FromDate" Type="date" Mode="In" />
+    <Parameter Name="ToDate" Type="date" Mode="In" />
+  </Function>
+  <Function Name="GetBodyShopData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetOverAllData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetOverallDataWithDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FromDate" Type="date" Mode="In" />
+    <Parameter Name="ToDate" Type="date" Mode="In" />
+  </Function>
+  <Function Name="GetPaintShopData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetTrnasformerWiseData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="GetUtilitiesData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="PaintShopDataWithDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FromDate" Type="date" Mode="In" />
+    <Parameter Name="ToDate" Type="date" Mode="In" />
+  </Function>
+  <Function Name="TestSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="name" Type="nvarchar" Mode="In" />
+    <Parameter Name="password" Type="nvarchar" Mode="In" />
+    <Parameter Name="flag" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="TrnasformerWiseDataWithDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FromDate" Type="date" Mode="In" />
+    <Parameter Name="ToDate" Type="date" Mode="In" />
+  </Function>
+  <Function Name="UtilitiesDataWithDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FromDate" Type="date" Mode="In" />
+    <Parameter Name="ToDate" Type="date" Mode="In" />
+  </Function>
+  <EntityContainer Name="PSA_PLC_STATIONSModelStoreContainer">
+    <EntitySet Name="GROUPMASTER" EntityType="Self.GROUPMASTER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="METERMASTER" EntityType="Self.METERMASTER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserMaster" EntityType="Self.UserMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TBL_ENERGYMETER" EntityType="Self.TBL_ENERGYMETER" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [TBL_ENERGYMETER].[ID] AS [ID], 
+    [TBL_ENERGYMETER].[STATIONS] AS [STATIONS], 
+    [TBL_ENERGYMETER].[METERID] AS [METERID], 
+    [TBL_ENERGYMETER].[GROUPID] AS [GROUPID], 
+    [TBL_ENERGYMETER].[CURRENTA] AS [CURRENTA], 
+    [TBL_ENERGYMETER].[CURRENTB] AS [CURRENTB], 
+    [TBL_ENERGYMETER].[CURRENTC] AS [CURRENTC], 
+    [TBL_ENERGYMETER].[VOLTAGEAB] AS [VOLTAGEAB], 
+    [TBL_ENERGYMETER].[VOLTAGEBC] AS [VOLTAGEBC], 
+    [TBL_ENERGYMETER].[VOLTAGECA] AS [VOLTAGECA], 
+    [TBL_ENERGYMETER].[VOLTAGELL] AS [VOLTAGELL], 
+    [TBL_ENERGYMETER].[VOLTAGEAN] AS [VOLTAGEAN], 
+    [TBL_ENERGYMETER].[VOLTAGEBN] AS [VOLTAGEBN], 
+    [TBL_ENERGYMETER].[VOLTAGECN] AS [VOLTAGECN], 
+    [TBL_ENERGYMETER].[VOLTAGELN] AS [VOLTAGELN], 
+    [TBL_ENERGYMETER].[MAXDEMAND] AS [MAXDEMAND], 
+    [TBL_ENERGYMETER].[POWERFACTOR] AS [POWERFACTOR], 
+    [TBL_ENERGYMETER].[ACTIVEENERGYDELIVERED] AS [ACTIVEENERGYDELIVERED], 
+    [TBL_ENERGYMETER].[SYNCDATETIME] AS [SYNCDATETIME]
+    FROM [dbo].[TBL_ENERGYMETER] AS [TBL_ENERGYMETER]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tbl_Test" EntityType="Self.tbl_Test" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tbl_Test].[id] AS [id], 
+    [tbl_Test].[UserName] AS [UserName], 
+    [tbl_Test].[UserPassword] AS [UserPassword], 
+    [tbl_Test].[Flag] AS [Flag]
+    FROM [dbo].[tbl_Test] AS [tbl_Test]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_EM_GROUPID" Association="Self.FK_EM_GROUPID">
+      <End Role="GROUPMASTER" EntitySet="GROUPMASTER" />
+      <End Role="TBL_ENERGYMETER" EntitySet="TBL_ENERGYMETER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EM_METERID" Association="Self.FK_EM_METERID">
+      <End Role="METERMASTER" EntitySet="METERMASTER" />
+      <End Role="TBL_ENERGYMETER" EntitySet="TBL_ENERGYMETER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GROUPID" Association="Self.FK_GROUPID">
+      <End Role="GROUPMASTER" EntitySet="GROUPMASTER" />
+      <End Role="METERMASTER" EntitySet="METERMASTER" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
