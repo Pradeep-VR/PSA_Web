@@ -570,10 +570,12 @@ namespace Kubota.Web.Dashboard.Controllers
 
                 if (groupId != "" && Interval != 0)
                 {
+                    decimal SpeCons = 0;
                     for (int k = Interval; k > 0; k--)
                     {
                         startDate = DateTime.Today.AddDays(-k);
-                        endDate = DateTime.Today.AddDays(1).AddTicks(-(k - 1));
+                        endDate = startDate.AddDays(1).AddTicks(-1);
+                        var ed = startDate.AddDays(1).AddTicks(-1);
                         var Consumption = "";
                         Qry = "SELECT METERID FROM METERMASTER WHERE GROUPID='" + groupId + "' AND FLAG = 1;";
                         var meters = _serve.GetDataTable(Qry);
@@ -581,14 +583,18 @@ namespace Kubota.Web.Dashboard.Controllers
                         {
                             for (int i = 0; i < meters.Rows.Count; i++)
                             {
-                                string meter = meters.Rows[i].ToString();
+                                string meter = meters.Rows[i]["METERID"].ToString();
                                 Consumption = _HomeController.GetConsumptions(meter, startDate.ToString(), endDate.ToString(), "M");
-                            }
-                            Cons.Add(Consumption);
-                            Days.Add(startDate.ToString("dd-MM-yyyy"));
-                        }
 
+                                var cons = Consumption == "" ? "0" : Consumption;
+                                SpeCons = SpeCons + Convert.ToDecimal(cons);
+                            }
+                            
+                        }
+                        Cons.Add(SpeCons.ToString("0.00"));
+                        Days.Add(startDate.ToString("dd-MM-yyyy"));
                     }
+                    
                 }
                 var res = new { days = Days, consumption = Cons };
                 return Json(res);

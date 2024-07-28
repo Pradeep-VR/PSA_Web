@@ -346,7 +346,7 @@
             var groupId = '@Html.Raw(groupId)';
             var divs = "'V','F'";
             onLoadScreen(groupId, divs);
-            LoadGraphData(groupId, '', '', '15');
+            LoadGraphData(groupId, '7');
         });
 
         function onLoadScreen(JstrGroupid,JMetrDiv) {
@@ -592,19 +592,19 @@
         let powerFactorData = [];
         let activeEnergyData = [];
 
-        function LoadGraphData(Id, FromDate, ToDate, Intval) {
+        function LoadGraphData(Id,Intval) {
         $.ajax({
             type: 'POST',
             url: '@Url.Action("GetGroupGraph", "Graph")',
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ groupId: Id, strFD: FromDate, strTD: ToDate, Interval: Intval}),
+            data: JSON.stringify({ groupId: Id, Interval: Intval}),
             success: function (response) {
                 debugger;
                 if (response) {
-                    let labels = response.SYNCDATETIME;
+                    let labels = response.days;
                     //maxDemandData = response.MaxDemand.map(x => parseFloat(x));
                     //powerFactorData = response.PowerFactor.map(x => parseFloat(x));
-                    activeEnergyData = response.ActiveEnergy.map(x => parseFloat(x));
+                    activeEnergyData = response.consumption.map(x => parseFloat(x));
 
                     myLineChart.data.labels = labels;
                     //myLineChart.data.datasets[0].data = maxDemandData;
@@ -631,25 +631,27 @@
         let ctx = document.getElementById('myLineChart').getContext('2d');
         let targetLineValue = 5;
 
+        function drawHorizontalLine(chartInstance, value, color) {
+            const yScale = chartInstance.scales.y;
+            const yPos = yScale.getPixelForValue(value);
+
+            chartInstance.ctx.save();
+            chartInstance.ctx.beginPath();
+            chartInstance.ctx.moveTo(chartInstance.chartArea.left, yPos);
+            chartInstance.ctx.lineTo(chartInstance.chartArea.right, yPos);
+            chartInstance.ctx.strokeStyle = color;
+            chartInstance.ctx.lineWidth = 1;
+            chartInstance.ctx.shadowColor = color;
+            chartInstance.ctx.shadowBlur = 10;
+            chartInstance.ctx.stroke();
+            chartInstance.ctx.restore();
+        }
+
         let myLineChart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: [],
-                datasets: [
-                    //{
-                    //    label: 'Maximum Demand',
-                    //    data: [],
-                    //    borderColor: 'blue',
-                    //    borderWidth: 2,
-                    //    fill: false,
-                    //},
-                    //{
-                    //    label: 'Power Factor',
-                    //    data: [],
-                    //    borderColor: 'red',
-                    //    borderWidth: 2,
-                    //    fill: false,
-                    //},
+                datasets: [                    
                     {
                         label: 'Active Energy Delivered',
                         data: [],
