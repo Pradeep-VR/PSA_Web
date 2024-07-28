@@ -269,7 +269,10 @@
             <div class="side-buttons">
                 <button id="viewGraphBtn" style="display:none;">View Graph</button>
                 <button id="viewDataBtn" style="display:none;" onclick="viewDataBtn_Clicked()">VIEW DATA</button>
-                <button id="btnOverAll" onclick="btn_OverAll()" style="width:250px">OVER ALL</button>
+                <button id="btnOverAll" onclick="btn_OverAll()" style="width:250px">OVER ALL</button>                
+            </div>
+            <div class="side-buttons">
+                <button id="btnTopCon" onclick="btn_TopCons()" style="width:250px">TOP CONSUMPTIONS</button>
             </div>
         </div>
     </div>
@@ -570,8 +573,15 @@
         window.location.href = `@Url.Action("OverAllIndex","Home")`;
     }
 
+    function btn_TopCons() {
+        window.location.href = `@Url.Action("TotalIndex","Total")`;
+    }
+
     function navigateToNextPage(groupId, groupName) {
-        window.location.href = `@Url.Action("InduvidualStationsData", "Home")?groupId=${groupId}&groupName=${groupName}`;
+        var yesdays = document.getElementById(`yesterday_${groupId}`).innerText;
+        var todays = document.getElementById(`today_${groupId}`).innerText;
+        var vals = `${groupId},${yesdays},${todays}`;
+        window.location.href = `@Url.Action("InduvidualStationsData", "Home")?groupId=${vals}&groupName=${groupName}`;
     }
 
     //  For Toggle Menu Icons Hide Only

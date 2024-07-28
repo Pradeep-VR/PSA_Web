@@ -201,6 +201,12 @@
         if (loadCnt === 0) {
             LoadMeters('', false);
         }
+        var intTime = document.getElementById('txtInterval').value;
+        GetDataForGenerateGraph_All("ALLMETERS", "ALLGROUPS", '', '', intTime).then((labels) => {
+            if (labels != null) {
+                generateChart_All(labels);
+            }
+        });
     }
 
     const increment = parseInt(@System.Configuration.ConfigurationManager.AppSettings["DStime"]);
@@ -299,88 +305,105 @@
         }
     };
 
-function GetDataForGenerateGraph_All(selectedMeter, selectedGroup, StartDate, EndDate, TimeInterval) {
-    return new Promise((resolve, reject) => {
-        $.ajax({
-            type: 'POST',
-            url: '@Url.Action("GetOverAllIndex_Graph_All", "Graph")',
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ groupId: selectedGroup, strMeterId: selectedMeter, strFD: StartDate, strTD: EndDate, Interval: TimeInterval }),
-            success: function (response) {
-                if (response != null) {
-                    var labels = {
-                        label: response.SYNCDATETIME,
-                        datasets: [
-                            {
-                                label: 'BODY_SHOP (KWH)',
-                                data: response.BODY_SHOP_ActiveEnergy,
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                fill: false
-                            },
-                            {
-                                label: 'GENERAL_ASSEMBLY (KWH)',
-                                data: response.GENERAL_ASSEMBLY_ActiveEnergy,
-                                borderColor: 'rgba(255, 99, 132, 1)',
-                                fill: false
-                            },
-                            {
-                                label: 'HOSTED_SERVICES (KWH)',
-                                data: response.HOSTED_SERVICES_ActiveEnergy,
-                                borderColor: 'rgba(54, 162, 235, 1)',
-                                fill: false
-                            },
-                            {
-                                label: 'PAINT_SHOP (KWH)',
-                                data: response.PAINT_SHOP_ActiveEnergy,
-                                borderColor: 'rgba(255, 206, 86, 1)',
-                                fill: false
-                            },
-                            {
-                                label: 'TRANSFORMER_WISE (KWH)',
-                                data: response.TRANSFORMER_WISE_ActiveEnergy,
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                fill: false
-                            },
-                            {
-                                label: 'UTILITIES (KWH)',
-                                data: response.UTILITIES_ActiveEnergy,
-                                borderColor: 'rgba(153, 102, 255, 1)',
-                                fill: false
-                            }
-                        ]
-                    };
-                    resolve(labels);
-                } else {
-                    resolve(null);
+    function GetDataForGenerateGraph_All(selectedMeter, selectedGroup, StartDate, EndDate, TimeInterval) {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetOverAllIndex_Graph_All", "Graph")',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ groupId: selectedGroup, strMeterId: selectedMeter, strFD: StartDate, strTD: EndDate, Interval: TimeInterval }),
+                success: function (response) {
+                    if (response != null) {
+                        var labels = {
+                            label: response.SYNCDATETIME,
+                            datasets: [
+                                {
+                                    label: 'BODY_SHOP (KWH)',
+                                    data: response.BODY_SHOP_ActiveEnergy,
+                                    borderColor: 'rgba(75, 192, 192, 1)',
+                                    fill: false
+                                },
+                                {
+                                    label: 'GENERAL_ASSEMBLY (KWH)',
+                                    data: response.GENERAL_ASSEMBLY_ActiveEnergy,
+                                    borderColor: 'rgba(255, 99, 132, 1)',
+                                    fill: false
+                                },
+                                {
+                                    label: 'HOSTED_SERVICES (KWH)',
+                                    data: response.HOSTED_SERVICES_ActiveEnergy,
+                                    borderColor: 'rgba(54, 162, 235, 1)',
+                                    fill: false
+                                },
+                                {
+                                    label: 'PAINT_SHOP (KWH)',
+                                    data: response.PAINT_SHOP_ActiveEnergy,
+                                    borderColor: 'rgba(255, 206, 86, 1)',
+                                    fill: false
+                                },
+                                {
+                                    label: 'TRANSFORMER_WISE (KWH)',
+                                    data: response.TRANSFORMER_WISE_ActiveEnergy,
+                                    borderColor: 'rgba(75, 192, 192, 1)',
+                                    fill: false
+                                },
+                                {
+                                    label: 'UTILITIES (KWH)',
+                                    data: response.UTILITIES_ActiveEnergy,
+                                    borderColor: 'rgba(153, 102, 255, 1)',
+                                    fill: false
+                                }
+                            ]
+                        };
+                        resolve(labels);
+                    } else {
+                        resolve(null);
+                    }
+                },
+                error: function (error) {
+                    reject(error);
                 }
-            },
-            error: function (error) {
-                reject(error);
-            }
+            });
         });
-    });
-}
+     }
+
+    let targetLineValue = 60;//document.getElementById('targetValue').value;
+
+    function drawHorizontalLine(chartInstance, value, color) {
+        const yScale = chartInstance.scales.y;
+        const yPos = yScale.getPixelForValue(value);
+
+        chartInstance.ctx.save();
+        chartInstance.ctx.beginPath();
+        chartInstance.ctx.moveTo(chartInstance.chartArea.left, yPos);
+        chartInstance.ctx.lineTo(chartInstance.chartArea.right, yPos);
+        chartInstance.ctx.strokeStyle = color;
+        chartInstance.ctx.lineWidth = 1;
+        chartInstance.ctx.shadowColor = color;
+        chartInstance.ctx.shadowBlur = 10;
+        chartInstance.ctx.stroke();
+        chartInstance.ctx.restore();
+    }
+
     function generateChart_All(labels) {
         var ctx = document.getElementById('myLineChart').getContext('2d');
 
         if (myLineChart) {
             myLineChart.destroy(); // Destroy the existing chart instance
         }
-
         myLineChart = new Chart(ctx, {
             type: 'line',
-            data: {
-                labels: labels.label,
-                datasets: labels.datasets
-            },
+                data: {
+                    labels: labels.label,
+                    datasets: labels.datasets
+                },
             options: {
                 responsive: true,
                 scales: {
                     x: {
-                        display: true,
                         title: {
                             display: true,
-                            text: 'TIMINGS',
+                            text: 'TIMING',
                             font: {
                                 size: 20,
                                 weight: 'bold',
@@ -390,7 +413,6 @@ function GetDataForGenerateGraph_All(selectedMeter, selectedGroup, StartDate, En
                         }
                     },
                     y: {
-                        display: true,
                         title: {
                             display: true,
                             text: 'UNITS',
@@ -400,11 +422,87 @@ function GetDataForGenerateGraph_All(selectedMeter, selectedGroup, StartDate, En
                                 family: 'Arial'
                             },
                             color: 'darkblue'
+                        },
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'left',
+                        labels: {
+                            boxWidth: 20,
+                            padding: 15,
+                            font: {
+                                size: 14,
+                                family: 'Arial'
+                            },
+                            color: 'black'
+                        }
+                    },
+                    annotation: {
+                        annotations: {
+                            line1: {
+                                type: 'line',
+                                yMin: targetLineValue,
+                                yMax: targetLineValue,
+                                borderColor: 'red',
+                                borderWidth: 2,
+                                label: {
+                                    content: 'Target',
+                                    enabled: true,
+                                    position: 'end'
+                                }
+                            }
                         }
                     }
                 }
-            }
+            },
+            plugins: [{
+                id: 'targetLine',
+                afterDraw: (chart) => {
+                    drawHorizontalLine(chart, targetLineValue, '#1ecbe1');
+                }
+            }]
         });
+        //myLineChart = new Chart(ctx, {
+        //    type: 'line',
+        //    data: {
+        //        labels: labels.label,
+        //        datasets: labels.datasets
+        //    },
+        //    options: {
+        //        responsive: true,
+        //        scales: {
+        //            x: {
+        //                display: true,
+        //                title: {
+        //                    display: true,
+        //                    text: 'TIMINGS',
+        //                    font: {
+        //                        size: 20,
+        //                        weight: 'bold',
+        //                        family: 'Arial'
+        //                    },
+        //                    color: 'darkblue'
+        //                }
+        //            },
+        //            y: {
+        //                display: true,
+        //                title: {
+        //                    display: true,
+        //                    text: 'UNITS',
+        //                    font: {
+        //                        size: 20,
+        //                        weight: 'bold',
+        //                        family: 'Arial'
+        //                    },
+        //                    color: 'darkblue'
+        //                }
+        //            }
+        //        }
+        //    }
+        //});
     }
 /*function generateChart_All(labels) {
     var ctx = document.getElementById('myLineChart').getContext('2d');
@@ -573,96 +671,6 @@ function GetDataForGenerateGraph_All(selectedMeter, selectedGroup, StartDate, En
     }
 
 
-    /*function generateChart(labels) {
-        var ctx = document.getElementById('myLineChart').getContext('2d');
-
-        if (myLineChart) {
-            myLineChart.destroy(); // Destroy the existing chart instance
-        }
-
-        myLineChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: labels.label,
-                datasets: [{
-                    label: 'Active Energy',
-                    data: labels.data,
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1,
-                    fill: false
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'TIMING',
-                            font: {
-                                size: 20,
-                                weight: 'bold',
-                                family: 'Arial'
-                            },
-                            color: 'darkblue'
-                        }
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'UNITS',
-                            font: {
-                                size: 20,
-                                weight: 'bold',
-                                family: 'Arial'
-                            },
-                            color: 'darkblue'
-                        },
-                        beginAtZero: true
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'left',
-                        labels: {
-                            boxWidth: 20,
-                            padding: 15,
-                            font: {
-                                size: 14,
-                                family: 'Arial'
-                            },
-                            color: 'black'
-                        }
-                    },
-                    annotation: {
-                        annotations: {
-                            line1: {
-                                type: 'line',
-                                yMin: 5,
-                                yMax: 60,
-                                borderColor: 'red',
-                                borderWidth: 2,
-                                label: {
-                                    content: 'Target',
-                                    enabled: true,
-                                    position: 'end'
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            plugins: [{
-                id: 'targetLine',
-                afterDraw: (chart) => {
-                    drawHorizontalLine(chart, targetLineValue, '#1ecbe1');
-                }
-            }]
-        });
-
-    }*/
-
     ///Table View Scripts
     function LoadTableData_Specific(strMId, strFDate, strTDate) {
         debugger;
@@ -720,7 +728,7 @@ function GetDataForGenerateGraph_All(selectedMeter, selectedGroup, StartDate, En
                     <td>${response.datetime}</td>
                     <td>${response.consumption}</td>
                 </tr>`;
-                tableBody.appendChild(row);                
+                tableBody.appendChild(row);
             },
             Error: function (err) {
                 alert(err);

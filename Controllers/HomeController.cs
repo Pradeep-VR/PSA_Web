@@ -655,8 +655,11 @@ namespace PSAPLCDashboard.Web.Dashboard.Controllers
 
         public ActionResult InduvidualStationsData(string groupId, string groupName)
         {
-            ViewBag.GroupId = groupId;
+            var vals = groupId.Split(',');
+            ViewBag.GroupId = vals[0];
             ViewBag.GroupName = groupName;
+            ViewBag.YesCon = vals[1];
+            ViewBag.ToCon = vals[2];
 
             return View();
         }

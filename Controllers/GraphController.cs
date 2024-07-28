@@ -296,15 +296,13 @@ namespace Kubota.Web.Dashboard.Controllers
             {
                 if (groupId != "")
                 {
-
                     query = "SELECT GROUPID,GROUPNAME FROM GROUPMASTER WHERE FLAG='1'";
-                    DataTable dt1 = _serve.GetDataTable(query);
+                    var dt1 = _serve.GetDataTable(query);
                     if (dt1.Rows.Count > 0)
                     {
                         for (int k = 0; k < dt1.Rows.Count; k++)
                         {
-                            string Groupid = dt1.Rows[k][0].ToString();
-
+                            string Groupid = dt1.Rows[k]["GROUPID"].ToString();
 
                             if (strMeterId == "ALLMETERS" && groupId == "ALLGROUPS")
                             {
@@ -313,15 +311,12 @@ namespace Kubota.Web.Dashboard.Controllers
                             else if (strMeterId != "ALLMETERS" && groupId == "ALLGROUPS")
                             {
                                 MQ = "E.GROUPID = '" + groupId + "' AND E.METERID = '" + strMeterId + "' ";
-
                             }
-
 
                             if (strFD != "" && strTD != "")
                             {
                                 startDate = DateTime.Parse(strFD);
                                 endDate = DateTime.Parse(strTD);
-
                             }
                             else
                             {
@@ -337,7 +332,7 @@ namespace Kubota.Web.Dashboard.Controllers
                                   " FROM TIMEINTERVALS T LEFT JOIN TBL_ENERGYMETER E ON CAST(CONVERT(DATETIME, E.SYNCDATETIME, 103) AS SMALLDATETIME) = CAST(T.INTERVALTIME AS SMALLDATETIME) " +
                                   " WHERE  " + MQ + "  ORDER BY T.INTERVALTIME ASC  OPTION (MAXRECURSION 32767); ";
 
-                            DataTable dt = _serve.GetDataTable(Qry);
+                            var dt = _serve.GetDataTable(Qry);
                             if (dt.Rows.Count > 0)
                             {
                                 List<string> syncdatetime = new List<string>();
@@ -356,6 +351,7 @@ namespace Kubota.Web.Dashboard.Controllers
                                     }
 
                                 }
+
                                 overAll.SYNCDATETIME = syncdatetime.ToArray();
 
                                 if (Groupid == "GBS")
@@ -558,39 +554,63 @@ namespace Kubota.Web.Dashboard.Controllers
         HomeController _HomeController = new HomeController();
 
         [HttpPost]
-        public ActionResult GetGroupGraph(string groupId, int Interval)
+        public ActionResult GetGroupGraph(string groupId, string Interval,string Divs)
         {
             string Qry = string.Empty;
             List<string> Cons = new List<string>();
             List<string> Days = new List<string>();
+            int Intervals = Convert.ToInt32(Interval);
             try
             {
                 var startDate = DateTime.Now;
                 var endDate = DateTime.Now;
 
-                if (groupId != "" && Interval != 0)
+                if (groupId != "" && Intervals != 0)
                 {
-                    decimal SpeCons = 0;
-                    for (int k = Interval; k > 0; k--)
+                    
+                    for (int k = Intervals; k > 0; k--)
                     {
+                        decimal SpeCons = 0;
                         startDate = DateTime.Today.AddDays(-k);
                         endDate = startDate.AddDays(1).AddTicks(-1);
                         var ed = startDate.AddDays(1).AddTicks(-1);
                         var Consumption = "";
-                        Qry = "SELECT METERID FROM METERMASTER WHERE GROUPID='" + groupId + "' AND FLAG = 1;";
-                        var meters = _serve.GetDataTable(Qry);
-                        if (meters.Rows.Count > 0)
+                        
+                        if (Divs == "'V','F'")
                         {
-                            for (int i = 0; i < meters.Rows.Count; i++)
+                            Qry = "SELECT METERID FROM METERMASTER WHERE GROUPID='" + groupId + "' AND FLAG = 1;";
+                            var meters = _serve.GetDataTable(Qry);
+                            if (meters.Rows.Count > 0)
                             {
-                                string meter = meters.Rows[i]["METERID"].ToString();
-                                Consumption = _HomeController.GetConsumptions(meter, startDate.ToString(), endDate.ToString(), "M");
+                                for (int i = 0; i < meters.Rows.Count; i++)
+                                {
+                                    string meter = meters.Rows[i]["METERID"].ToString();
+                                    Consumption = _HomeController.GetConsumptions(meter, startDate.ToString(), endDate.ToString(), "M");
 
-                                var cons = Consumption == "" ? "0" : Consumption;
-                                SpeCons = SpeCons + Convert.ToDecimal(cons);
+                                    var cons = Consumption == "" ? "0" : Consumption;
+                                    SpeCons = SpeCons + Convert.ToDecimal(cons);
+                                }
+
                             }
-                            
                         }
+                        else
+                        {
+                            Qry = "SELECT METERID FROM METERMASTER WHERE GROUPID='" + groupId + "' AND METERDIVISION = " + Divs + " AND FLAG = 1;";
+                            var meters = _serve.GetDataTable(Qry);
+                            if (meters.Rows.Count > 0)
+                            {
+                                for (int i = 0; i < meters.Rows.Count; i++)
+                                {
+                                    string meter = meters.Rows[i]["METERID"].ToString();
+                                    Consumption = _HomeController.GetConsumptions(meter, startDate.ToString(), endDate.ToString(), "M");
+
+                                    var cons = Consumption == "" ? "0" : Consumption;
+                                    SpeCons = SpeCons + Convert.ToDecimal(cons);
+                                }
+
+                            }
+                        }
+                        
                         Cons.Add(SpeCons.ToString("0.00"));
                         Days.Add(startDate.ToString("dd-MM-yyyy"));
                     }
