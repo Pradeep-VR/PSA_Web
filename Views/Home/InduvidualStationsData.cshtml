@@ -285,7 +285,7 @@
 
     <div class="heading">@Html.Raw(groupName)</div>
 
-    <div style="display:none;flex-direction:row;justify-content:space-around;">
+    <div style="display:flex;flex-direction:row;justify-content:space-around;">
         <span><a style="font-size:20px;color:black;">YESTERDAY CONSUMPTION : @Html.Raw(yesCon)</a></span>
         <span><a style="font-size:20px;color:black;">TODAY CONSUMPTION : @Html.Raw(toCon)</a></span>
     </div>
@@ -300,6 +300,7 @@
                     <option value="'V'">VARIABLE</option>
                 </select>
                 <select class="form-select" id="ddlTimes" onchange="OnSelectChanged()" style=" margin:5px;">
+                    <option value="1">DAILY</option>
                     <option value="7">WEEKLY</option>
                     <option value="30">MONTHLY</option>
                 </select>
@@ -621,6 +622,42 @@
         });
 
         /* Grap Part */
+
+        function LoadGraphData1(Id, FromDate, ToDate, Name,Intval) {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetOverallGraphData", "Graph")',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ groupId: Id, strFD: FromDate, strTD: ToDate, groupName: Name, Interval: Intval}),
+                success: function (response) {
+                    debugger;
+                    if (response) {
+                        let labels = response.SYNCDATETIME;
+                        maxDemandData = response.MaxDemand.map(x => parseFloat(x));
+                        powerFactorData = response.PowerFactor.map(x => parseFloat(x));
+                        activeEnergyData = response.ActiveEnergy.map(x => parseFloat(x));
+
+                        myLineChart.data.labels = labels;
+                        myLineChart.data.datasets[0].data = maxDemandData;
+                        myLineChart.data.datasets[1].data = powerFactorData;
+                        myLineChart.data.datasets[2].data = activeEnergyData;
+                        let sum = activeEnergyData.reduce((accumulator, currentValue) => {
+                            return accumulator + currentValue;
+                        }, 0);
+
+                        let inputField = document.getElementById('txtConsumption');
+                        inputField.value = sum.toFixed(2);
+
+                        myLineChart.update();
+                    } else {
+                        alert('No data found');
+                    }
+                },
+                error: function (err) {
+                    alert('Error : ' + err);
+                }
+            });
+        }
 
         let maxDemandData = [];
         let powerFactorData = [];

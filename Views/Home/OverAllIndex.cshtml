@@ -151,12 +151,13 @@
                 <br />
                 <br />
                 <section class="table__body">
-                    <table id="dataTable" style="background-color:lightgray" class="display">
+
+                    <table id="dataTable" style="background-color: lightgray; display: none;" class="display">
                         <!--For Specific-->
-                        <thead id="th_specific" style="display:none;">
+                        <thead>
                             <tr>
                                 <th>METER</th>
-                                <th>Date&Time</th>
+                                <th>DATE&TIME</th>
                                 <th>ACTIVEENERGY</th>
                                 <th>CONSUMPTION</th>
                                 <th>RY CURRENT</th>
@@ -167,16 +168,23 @@
                                 <th>BR VOLTAGE</th>
                                 <th>MAX DEMAND</th>
                                 <th>POWER FACTOR</th>
-                                <th><label for="export-file" id="toCSV"><img src="~/Content/assets/images/excel.png" alt="" style="height:30px;" title="Export File"></label></th>
+                                <th><label for="export-file" id="toCSV" onclick="csvExport()"><img src="~/Content/assets/images/excel.png" alt="" style="height:30px;" title="Export File"></label></th>
                             </tr>
                         </thead>
+
+                        <tbody>
+                            @* Binding From Function DownSide. *@
+                        </tbody>
+                    </table>
+
+                    <table id="dataTable1" style="background-color:lightgray" class="display">
                         <!--For OverAll-->
-                        <thead id="th_overall" style="">
+                        <thead id="th_overall">
                             <tr>
-                                <th>GROUP</th>
-                                <th>Date&Time</th>
+                                <th>GROUPNAME</th>
+                                <th>DATE&TIME</th>
                                 <th>CONSUMPTION</th>
-                                <th><label for="export-file" id="toCSV"><img src="~/Content/assets/images/excel.png" alt="" style="height:30px;" title="Export File"></label></th>
+                                <th><label for="export-file" id="toCSV1" onclick="csvExport1()"><img src="~/Content/assets/images/excel.png" alt="" style="height:30px;" title="Export File"></label></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -192,6 +200,11 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
+<script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+<link href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" rel="stylesheet" />
 <script>
     var loadCnt = 0;
     var myLineChart; // Declare a global variable for the chart instance
@@ -721,7 +734,7 @@
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ strGroup: strGId, strFD: strFDate, strTD: strTDate }),
             success: function (response) {
-                const tableBody = document.getElementById('th_overall');
+                const tableBody = document.getElementById('#dataTable1 tbody');
                 const row = document.createElement('tr');
                 row.innerHTML = `<tr>
                     <td>${response.group}</td>
@@ -752,8 +765,8 @@
             //        generateChart(labels);
             //    }
             //});
-            document.getElementById('th_specific').style = '';
-            document.getElementById('th_overall').style = 'display:none;';
+            document.getElementById('dataTable').style = '';
+            document.getElementById('dataTable1').style = 'display:none;';
             LoadTableData_Specific(selectedMeter, StartDate, EndDate);
 
         } else if (selectedGroup = "ALLGROUPS") {
@@ -780,6 +793,18 @@
         }
     };
 
+    function csvExport1() {
+        const table = document.getElementById('dataTable1');
+        const data = toCSV(table);
+        downloadXLSX(data, 'OverAll_Export');
+    }
+
+    function csvExport() {
+        const table = document.getElementById('dataTable');
+        const data = toCSV(table);
+        downloadXLSX(data, 'Specific_Export');
+    }
+
         const csv_btn = document.querySelector('#toCSV');
         const toCSV = function (table) {
             const t_heads = table.querySelectorAll('th'),
@@ -800,9 +825,9 @@
             XLSX.utils.book_append_sheet(wb, ws, 'OverAll_Export');
             XLSX.writeFile(wb, `${fileName}.xlsx`);
         }
-        csv_btn.onclick = () => {
-            const table = document.getElementById('dataTable');
-            const data = toCSV(table);
-            downloadXLSX(data, 'OverAll_Export');
-        }
+        //csv_btn.onclick = () => {
+        //    const table = document.getElementById('dataTable');
+        //    const data = toCSV(table);
+        //    downloadXLSX(data, 'OverAll_Export');
+        //}
 </script>

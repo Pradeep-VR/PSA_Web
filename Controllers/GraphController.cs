@@ -281,6 +281,90 @@ namespace Kubota.Web.Dashboard.Controllers
 
         */
 
+        /*
+        HomeController _Home = new HomeController();
+
+        [HttpPost]
+        public ActionResult GetOverAllGraphDatas(string groupId, string strMeterId, string strFD, string strTD, int Interval)
+        {
+            string Qry = string.Empty;
+            string query = string.Empty;
+
+            var startDate = DateTime.Now;
+            var endDate = DateTime.Now;
+            TestModel overAll = new TestModel();
+            var Consumption = "";
+
+
+            if (strFD != "" && strTD != "")
+            {
+                startDate = DateTime.Parse(strFD);
+                endDate = DateTime.Parse(strTD);
+            }
+            else
+            {
+                DateTime startOfToday = DateTime.Today;
+                DateTime endOfToday = DateTime.Today.AddDays(1).AddTicks(-1);
+                startDate = startOfToday;
+                endDate = endOfToday;
+            }
+
+            if (groupId == "ALLGROUPS" && strMeterId == "ALLMETERS"){
+                Qry = "SELECT GROUPID,GROUPNAME FROM GROUPMASTER WHERE FLAG='1'";
+                var dt = _serve.GetDataTable(Qry);
+                if(dt.Rows.Count > 0)
+                {
+                    for(int k = 0; k < dt.Rows.Count; k++)
+                    {
+                        decimal cons = 0;
+                        string Groupid = dt.Rows[k]["GROUPID"].ToString();
+                        query = "SELECT METERID , METERNAME FROM METERMASTER WHERE GROUPID='" + Groupid + "' AND FLAG=1;";
+                        var dt11 = _serve.GetDataTable(query);
+                        if(dt11.Rows.Count > 0)
+                        {
+                            for(int i = 0; i < dt11.Rows.Count; i++)
+                            {
+                                string meter = dt11.Rows[i]["METERID"].ToString();
+                                Consumption = _Home.GetConsumptions(meter, startDate.ToString(), endDate.ToString(), "M");
+                                Consumption = Consumption == null ? "0" : Consumption;
+                                cons = cons + Convert.ToDecimal(Consumption);
+                            }
+                        }
+
+                        overAll.SYNCDATETIME = syncdatetime.ToArray();
+
+                        if (Groupid == "GBS")
+                        {
+                            overAll.BODY_SHOP_ActiveEnergy = activeenergy.ToArray();
+                        }
+                        else if (Groupid == "GGA")
+                        {
+                            overAll.GENERAL_ASSEMBLY_ActiveEnergy = activeenergy.ToArray();
+                        }
+                        else if (Groupid == "GHS")
+                        {
+                            overAll.HOSTED_SERVICES_ActiveEnergy = activeenergy.ToArray();
+                        }
+                        else if (Groupid == "GPS")
+                        {
+                            overAll.PAINT_SHOP_ActiveEnergy = activeenergy.ToArray();
+                        }
+                        else if (Groupid == "GTW")
+                        {
+                            overAll.TRANSFORMER_WISE_ActiveEnergy = activeenergy.ToArray();
+                        }
+                        else if (Groupid == "GU")
+                        {
+                            overAll.UTILITIES_ActiveEnergy = activeenergy.ToArray();
+                        }
+
+                    }
+                    
+                }
+            }
+        }
+        */
+
         [HttpPost]
         public ActionResult GetOverAllIndex_Graph_All(string groupId, string strMeterId, string strFD, string strTD, int Interval)
         {
@@ -326,11 +410,13 @@ namespace Kubota.Web.Dashboard.Controllers
                                 endDate = endOfToday;
                             }
 
-                            Qry = " WITH TIMEINTERVALS AS (SELECT CONVERT(DATETIME, '" + startDate + "', 103) AS INTERVALTIME  UNION ALL  SELECT DATEADD(MINUTE, " + Interval + ", INTERVALTIME)  " +
-                                  " FROM TIMEINTERVALS  WHERE DATEADD(MINUTE, " + Interval + ", INTERVALTIME) <= CONVERT(DATETIME, '" + endDate + "', 103)) " +
-                                  " SELECT T.INTERVALTIME AS DATETIMES,E.CURRENTA,E.CURRENTB,E.CURRENTC,E.VOLTAGEAB,E.VOLTAGEBC,E.VOLTAGECA,E.MAXDEMAND,E.POWERFACTOR,E.ACTIVEENERGYDELIVERED AS KWH " +
-                                  " FROM TIMEINTERVALS T LEFT JOIN TBL_ENERGYMETER E ON CAST(CONVERT(DATETIME, E.SYNCDATETIME, 103) AS SMALLDATETIME) = CAST(T.INTERVALTIME AS SMALLDATETIME) " +
-                                  " WHERE  " + MQ + "  ORDER BY T.INTERVALTIME ASC  OPTION (MAXRECURSION 32767); ";
+                            Qry = "WITH TIMEINTERVALS AS (SELECT CONVERT(DATETIME, (SELECT TOP 1 SYNCDATETIME FROM TBL_ENERGYMETER E WHERE " +
+                                "CONVERT(DATETIME,SYNCDATETIME,103) BETWEEN CONVERT(DATETIME,'" + startDate + "',103) AND CONVERT(DATETIME,'" + endDate + "',103) " +
+                                "ORDER BY SYNCDATETIME ASC), 103) AS INTERVALTIME  UNION ALL  SELECT DATEADD(MINUTE, " + Interval + ", INTERVALTIME)   FROM TIMEINTERVALS " +
+                                " WHERE DATEADD(MINUTE, " + Interval + ", INTERVALTIME) <= CONVERT(DATETIME, '" + endDate + "', 103))  SELECT T.INTERVALTIME AS DATETIMES," +
+                                "E.CURRENTA, E.CURRENTB,E.CURRENTC,E.VOLTAGEAB,E.VOLTAGEBC,E.VOLTAGECA,E.MAXDEMAND,E.POWERFACTOR,E.ACTIVEENERGYDELIVERED AS KWH  FROM " +
+                                "TIMEINTERVALS T  LEFT JOIN TBL_ENERGYMETER E ON CAST(CONVERT(DATETIME, E.SYNCDATETIME, 103) AS SMALLDATETIME) = CAST(T.INTERVALTIME AS SMALLDATETIME)  " +
+                                " WHERE  " + MQ + "  ORDER BY T.INTERVALTIME ASC  OPTION (MAXRECURSION 32767); ";
 
                             var dt = _serve.GetDataTable(Qry);
                             if (dt.Rows.Count > 0)
@@ -507,11 +593,18 @@ namespace Kubota.Web.Dashboard.Controllers
                 //    "FROM TBL_ENERGYMETER WHERE METERID = '" + groupId + "' ) E ON CAST(CONVERT(DATETIME, E.SYNCDATETIME, 103) AS SMALLDATETIME) = CAST(T.INTERVALTIME AS SMALLDATETIME) " +
                 //    "ORDER BY T.INTERVALTIME ASC OPTION (MAXRECURSION 32767);";
 
-                Qry = "WITH TIMEINTERVALS AS (SELECT CONVERT(DATETIME, '" + startDate + "', 103) AS INTERVALTIME  UNION ALL  SELECT DATEADD(MINUTE, " + Interval + ", INTERVALTIME)   FROM TIMEINTERVALS  WHERE DATEADD(MINUTE, " + Interval + ", INTERVALTIME) <= CONVERT(DATETIME, '" + endDate + "', 103)) " +
-                    "SELECT T.INTERVALTIME AS DATETIMES,E.CURRENTA,E.CURRENTB,E.CURRENTC,E.VOLTAGEAB,E.VOLTAGEBC,E.VOLTAGECA,E.MAXDEMAND,E.POWERFACTOR,E.ACTIVEENERGYDELIVERED AS KWH " +
-                    "FROM TIMEINTERVALS T LEFT JOIN TBL_ENERGYMETER E ON CAST(CONVERT(DATETIME, E.SYNCDATETIME, 103) AS SMALLDATETIME) = CAST(T.INTERVALTIME AS SMALLDATETIME) " +
-                    "WHERE  METERID = '" + groupId + "'  ORDER BY T.INTERVALTIME ASC  OPTION (MAXRECURSION 32767); ";
+                //Qry = "WITH TIMEINTERVALS AS (SELECT CONVERT(DATETIME, '" + startDate + "', 103) AS INTERVALTIME  UNION ALL  SELECT DATEADD(MINUTE, " + Interval + ", INTERVALTIME)   FROM TIMEINTERVALS  WHERE DATEADD(MINUTE, " + Interval + ", INTERVALTIME) <= CONVERT(DATETIME, '" + endDate + "', 103)) " +
+                //    "SELECT T.INTERVALTIME AS DATETIMES,E.CURRENTA,E.CURRENTB,E.CURRENTC,E.VOLTAGEAB,E.VOLTAGEBC,E.VOLTAGECA,E.MAXDEMAND,E.POWERFACTOR,E.ACTIVEENERGYDELIVERED AS KWH " +
+                //    "FROM TIMEINTERVALS T LEFT JOIN TBL_ENERGYMETER E ON CAST(CONVERT(DATETIME, E.SYNCDATETIME, 103) AS SMALLDATETIME) = CAST(T.INTERVALTIME AS SMALLDATETIME) " +
+                //    "WHERE  METERID = '" + groupId + "'  ORDER BY T.INTERVALTIME ASC  OPTION (MAXRECURSION 32767); ";
 
+                Qry = "WITH TIMEINTERVALS AS (SELECT CONVERT(DATETIME, (SELECT TOP 1 SYNCDATETIME FROM TBL_ENERGYMETER E WHERE  " +
+                                "CONVERT(DATETIME,SYNCDATETIME,103) BETWEEN CONVERT(DATETIME,'" + startDate + "',103) AND CONVERT(DATETIME,'" + endDate + "',103) " +
+                                "ORDER BY SYNCDATETIME ASC), 103) AS INTERVALTIME  UNION ALL  SELECT DATEADD(MINUTE, " + Interval + ", INTERVALTIME)   FROM TIMEINTERVALS " +
+                                " WHERE DATEADD(MINUTE, " + Interval + ", INTERVALTIME) <= CONVERT(DATETIME, '" + endDate + "', 103))  SELECT T.INTERVALTIME AS DATETIMES," +
+                                "E.CURRENTA, E.CURRENTB,E.CURRENTC,E.VOLTAGEAB,E.VOLTAGEBC,E.VOLTAGECA,E.MAXDEMAND,E.POWERFACTOR,E.ACTIVEENERGYDELIVERED AS KWH  FROM " +
+                                "TIMEINTERVALS T  LEFT JOIN TBL_ENERGYMETER E ON CAST(CONVERT(DATETIME, E.SYNCDATETIME, 103) AS SMALLDATETIME) = CAST(T.INTERVALTIME AS SMALLDATETIME)  " +
+                                " WHERE  E.METERID = '" + groupId + "'  ORDER BY T.INTERVALTIME ASC  OPTION (MAXRECURSION 32767); ";
                 DataTable dt = _serve.GetDataTable(Qry);
                 if (dt.Rows.Count > 0)
                 {
@@ -664,15 +757,22 @@ namespace Kubota.Web.Dashboard.Controllers
                     var datetime = DateTime.Parse(DateTime.Now.ToString());
                     //BQ = "  AND CONVERT(DATE,SYNCDATETIME) = CONVERT(DATE,'08-07-2024')  ";
                     BQ = "  AND CONVERT(DATE,SYNCDATETIME,103) = CONVERT(DATE,'" + datetime + "',103)  ";
+                    strFD = datetime.ToString("dd-MM-yyyy");
                 }
-
+                string GroupName = string.Empty;
                 string Qry = "SELECT MM.METERNAME,SYNCDATETIME, CURRENTA ,CURRENTB,CURRENTC,VOLTAGEAB,VOLTAGEBC,VOLTAGECA,MAXDEMAND,POWERFACTOR,ACTIVEENERGYDELIVERED ,SYNCDATETIME" +
                     " FROM TBL_ENERGYMETER EM LEFT JOIN METERMASTER MM ON EM.METERID = MM.METERID WHERE EM.GROUPID='" + strGroup + "' " + BQ + "";
                 DataTable dt = _serve.GetDataTable(Qry);
                 if (dt.Rows.Count > 0)
                 {
-                    List<string> consumption = new List<string>();
+                    string qrty = "SELECT GROUPNAME FROM GROUPMASTER WHERE GROUPID='" + strGroup + "' AND FLAG=1";
+                    var gn = _serve.GetDataTable(qrty);
+                    if (gn.Rows.Count > 0) {
+                        GroupName = gn.Rows[0][0].ToString();
+                    }
 
+
+                    List<string> consumption = new List<string>();
                     int j = 0;
 
                     for (int i = 0; i < dt.Rows.Count; i++)
@@ -695,18 +795,21 @@ namespace Kubota.Web.Dashboard.Controllers
                         }
                     }
 
-
-
+                    var retRes = new
+                    {
+                        group = GroupName,
+                        datetime = strFD + " - " + strTD,
+                        consumption = Ov_Cons
+                    };
+                    return Json(retRes);
                 }
-
-                var retRes = new
+                else
                 {
-                    group = strGroup,
-                    datetime = strFD + " - " + strTD,
-                    consumption = Ov_Cons
-                };
+                    return Json(null);
+                }
+                
 
-                return Json(retRes);
+                
             }
             catch (Exception ex)
             {

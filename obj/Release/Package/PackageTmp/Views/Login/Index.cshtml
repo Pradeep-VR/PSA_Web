@@ -55,6 +55,11 @@
 
     </div>
 
+    <script src="~/Content/assets/libs/jquery/jquery.min.js"></script>
+    <script src="~/Content/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/assets/libs/metismenu/metisMenu.min.js"></script>
+    <script src="~/Content/assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="~/Content/assets/libs/node-waves/waves.min.js"></script>
 
     <script>
 
@@ -81,7 +86,7 @@
                 var NewUserName = $("#NewUserName").val();
                 var NewUserId = $("#NewUserid").val();
                 var Newpassword = $("#Newpasswordid").val();
-                
+
                 if (NewUserName !== "" && NewUserId !== "" && Newpassword !== "") {
                     SigninMethod(NewUserName, NewUserId, Newpassword);
                 } else {

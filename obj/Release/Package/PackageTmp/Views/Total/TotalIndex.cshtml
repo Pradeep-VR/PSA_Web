@@ -122,21 +122,21 @@
             margin-bottom: 20px;
         }
 
-            .labell {
-                display: block;
-                color: forestgreen;
-                font-weight: bold;
-                font-size: 17px;
-            }
+        .labell {
+            display: block;
+            color: forestgreen;
+            font-weight: bold;
+            font-size: 17px;
+        }
 
-            .inputt {
-                margin-bottom: 10px;
-                display: block;
-                width: 365px;
-                padding: 5px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-            }
+        .inputt {
+            margin-bottom: 10px;
+            display: block;
+            width: 365px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
 
         .side-buttons {
             display: flex;
@@ -248,45 +248,36 @@
 </head>
 <body>
     <div class="heading">PSA | <span style="color:darkred">@Html.Raw(Name)</span> | BAR GRAPH <span style="color:darkred;">@DateTime.Now</span></div>
-
-    <div class="menu-icon" onclick="toggleControls()">☰</div>
-    <div class="controls-container">
-        <div class="controls">
-            <div class="date-selector">
-
-                <div class="dropdown">
-
-                    <button class="btn dropdown-toggle"
-                            type="button"
-                            id="multiSelectDropdown"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false" style=" color: white !important; font-weight: bold; width: 362px; background-color: #4CAF50; margin-bottom: 15px;">
-                        Select Meters
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="multiSelectDropdown">
-                        <li style="width:361px;">
-                            <div class="col-lg-12" id="ddlmetersname">
-                                @*<label style="color:forestgreen;">
-                                    <input type="checkbox" value="Java" /> JAVA
-                                </label>*@
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
-                <label class="lablell" style=" color: forestgreen; font-weight: bold;" for="FromDate">From Date:</label>
-                <input class="inputt" type="date" id="Fdate" name="fromdate">
-                <label class="lablell" style=" color: forestgreen; font-weight: bold;" for="ToDate">To Date:</label>
-                <input class="inputt" type="date" id="Tdate" name="todate">
-            </div>
-            <div class="side-buttons">                
-                <button id="viewButton" onclick="ViewBtn_Clicked()">View</button>
-            </div>
+    <div style="display:flex; flex-direction:row; margin:10px">
+        <div style="margin:10px;width:250px;">
+            <label class="lablell" style=" color: forestgreen; font-weight: bold;" for="FromDate">GROUPS</label>
+            <select class="form-select" id="ddlGroups" onchange="ddlGroupChange()" style="margin:5px;">
+            </select>
         </div>
-    </div>    
-    <br />
-    <br />
-    <canvas id="myLineChart" width="380" height="150" style="overflow:auto;" onclick="toggleControls1()"></canvas>
+
+        <div style="margin: 10px; width: 250px; display:none;">
+            <label class="lablell" style=" color: forestgreen; font-weight: bold;" for="FromDate">METERS</label>
+            <select class="form-select" id="ddlMeters" @*onchange="OnSelectChanged()"*@ disabled="disabled" style="margin:5px;">
+            </select>
+        </div>
+
+        <div style="margin:10px">
+            <label class="lablell" style=" color: forestgreen; font-weight: bold;" for="FromDate">From Date:</label>
+            <input class="inputt" type="date" id="Fdate" style="margin-top:7px;" name="fromdate">
+        </div>
+
+        <div style="margin:10px">
+            <label class="lablell" style=" color: forestgreen; font-weight: bold;" for="ToDate">To Date:</label>
+            <input class="inputt" type="date" id="Tdate" style="margin-top:7px;" name="todate">
+        </div>
+
+        <div style="margin:10px;">
+            <button id="viewButton" style="width: 100px;height: 30px;background-color: forestgreen;color: white;border: 0;border-radius: 5px;margin-top: 35px;"
+                    onclick="ViewBtn_Clicked()">View</button>
+        </div>
+    </div>
+    
+    <canvas id="myLineChart" width="380" height="120" style="overflow:auto;" onclick="toggleControls1()"></canvas>
 
     <script src="~/Content/assets/libs/jquery/jquery.min.js"></script>
     <script src="~/Content/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -298,25 +289,61 @@
         const loadNameData = ["Load", "Load", "Load", "Load"];
 
         $(document).ready(function () {
-            var metId = '@Html.Raw(mId)';
-            LoadGroups(metId);
-            BarGraph(loadData, loadNameData);
+            LoadGroups();
+            BarGraphOnload('All', '', '');
         });
 
+        function ddlGroupChange() {
+            var ddlGroupData = document.getElementById('ddlGroups');
+            var ddlGroupselected = ddlGroupData.options[ddlGroupData.selectedIndex];
+            var ddlGroup = ddlGroupselected.value;
+            if (ddlGroup != 'All') {
+                document.getElementById('ddlMeters').removeAttribute("disabled");
+                LoadMeters(ddlGroup);
 
-        function LoadGroups(strId) {
+                var ddlGroupData = document.getElementById('ddlGroups');
+                var ddlGroupselected = ddlGroupData.options[ddlGroupData.selectedIndex];
+                var ddlGroup = ddlGroupselected.value;
+
+                BarGraphOnload(ddlGroup, '', '');
+            } else {
+                document.getElementById('ddlMeters').setAttribute("disabled", "disabled");
+            }
+
+        }
+
+        function LoadGroups() {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetGroupsWithMeters", "Home")',
+                contentType: "application/json; charset=utf-8",
+                success: function (response) {
+                    var html = `<option value='All'>Select All</option>`;
+                    for (var i = 0; i < response.length; i++) {
+                        var group = response[i];
+                        html += `<option value='${group.GroupId}'>${group.GroupName}</option>`;
+                    }
+                    $('#ddlGroups').html(html);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
+
+
+        function LoadMeters(strId) {
             $.ajax({
                 type: 'POST',
                 url: '@Url.Action("GetMetersName", "Home")',
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify({ Groupid: strId }),
                 success: function (getmetersname) {
+                    var html = `<option value='All'>Select All</option>`;
                     for (var i = 0; i < getmetersname.MMASTER.length; i++) {
                         var meter = getmetersname.MMASTER[i];
-                        var html = '<label style="color:black; padding-left:10px;font-size: 15px;">'
-                            + '<input type="checkbox" name="Meteridentify" style="height:10px;"  value=' + meter.METERID + ' /> &nbsp;&nbsp;' + meter.METERNAME + ''
-                            + '</label><br/>'
-                        $('#ddlmetersname').append(html);
+                        html += `<option value='${meter.METERID}'>${meter.METERNAME}</option>`;
+                        $('#ddlMeters').html(html);
                     }
                 },
                 error: function (err) {
@@ -328,21 +355,57 @@
         function ViewBtn_Clicked() {
             loadData.length = 0;
             loadNameData.length = 0;
-            var meternames = [];
-            $("input:checkbox[name=Meteridentify]:checked").each(function () {
-                meternames.push($(this).val());
-            });
+            //var meternames = [];
+            //$("input:checkbox[name=Meteridentify]:checked").each(function () {
+            //    meternames.push($(this).val());
+            //});
+            var ddlGroupData = document.getElementById('ddlGroups');
+            var ddlGroupselected = ddlGroupData.options[ddlGroupData.selectedIndex];
+            var ddlGroup = ddlGroupselected.value;
+            
             var fDate = document.getElementById('Fdate').value;
             var tDate = document.getElementById('Tdate').value;
-            if (fDate == "" && tDate == "" && meternames.length == 0) {
-                alert("Please select the Meters / Date's.....!");
+            if (fDate == "" && tDate == "") {
+                alert("Please select the Group's / Date's.....!");
             } else {
-                for (let i = 0; i < meternames.length; i++) {
-                    GetBarGraphData(meternames[i], fDate, tDate);
-                }
+                //for (let i = 0; i < meternames.length; i++) {
+                //    GetBarGraphData(meternames[i], fDate, tDate);
+                //}
+                BarGraphOnload(ddlGroup, fDate, tDate);
             }
             //BarGraph(loadData, loadNameData);
-            
+
+        }
+
+        function BarGraphOnload(id,startdate,enddate) {
+            loadData.length = 0;
+            loadNameData.length = 0;
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetGroupsData", "Total")',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ strGroup: id, strStartD: startdate, strEndD: enddate }),
+                success: function (response) {
+                    if (response) {
+                        var meterNames = response.groupname; //`${response.name}`;
+                        var meterConsumptions = response.groupcons; //`${response.data}`;
+                        if (Array.isArray(meterNames) && Array.isArray(meterConsumptions)) {
+                            meterNames.forEach(function (name, index) {
+                                loadNameData.push(name);
+                                loadData.push(meterConsumptions[index]);
+                                BarGraph(loadData, loadNameData);
+                            });
+                        }
+
+                    } else {
+                        alert('Response Empty...');
+                    }
+
+                },
+                error: function (err) {
+                    alert(`Error : ${err}`);
+                }
+            });
         }
 
         function GetBarGraphData(metId, SDate, EDate) {
@@ -362,7 +425,7 @@
                     } else {
                         alert('Response Empty...');
                     }
-                    
+
                 },
                 error: function (err) {
                     alert(`Error : ${err}`);

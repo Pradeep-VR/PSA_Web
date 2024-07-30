@@ -271,6 +271,9 @@
                 <button id="viewDataBtn" style="display:none;" onclick="viewDataBtn_Clicked()">VIEW DATA</button>
                 <button id="btnOverAll" onclick="btn_OverAll()" style="width:250px">OVER ALL</button>
             </div>
+            <div class="side-buttons">
+                <button id="btnTopCon" onclick="btn_TopCons()" style="width:250px">TOP CONSUMPTIONS</button>
+            </div>
         </div>
     </div>
 
@@ -352,36 +355,37 @@
                         `;
                         }
                         else {
-                            groupHtml = `
-                            <div class="col-md-4 col-sm-6 col-12 p-1">
-                                <div class="card custom-bg" style="background-color: ${color};" ondblclick="navigateToNextPage('${group.GroupId}', '${group.GroupName}')">
-                                    <div class="card-body" id="Group_${group.GroupId}">
-                                        <div style="display: flex;justify-content: center;">                                        
-                                        <h3 style="color:#FFD700;font-size: 3em;">${group.GroupName}</h3>
-                                        </div>
-                                        <div class="consume-labels">
-                                            <label style="font-size:1.5em;">YESTERDAY: <span id="yesterday_${group.GroupId}"></span></label>
-                                            <label style="font-size:1.5em;">TODAY: <span id="today_${group.GroupId}"></span></label>
-                                        </div>
-                                        <div>
-
-                                        </div>
-                                        <div style="display: flex;justify-content: space-evenly;">
-                                        <div>
-                                        <h3 style="color:#DEF9C4;font-size: 3em;">VARIABLE</h3>
-                                        <h1 style="font-size:1.5em; color:#FFD700;">TODAY :<span style="color:#FFFFFF;" id="var_today_con${group.GroupId}"> 00</span></h1>
-                                        <h1 style="font-size:1.5em; color:#FFD700;">YESTERDAY :<span style="color:#FFFFFF;" id="var_yesday_con${group.GroupId}"> 00</span></h1>
-                                        </div>
-                                        <div>
-                                        <h3 style="color:#DEF9C4;font-size: 3em;">FIXED</h3>
-                                        <h1 style="font-size:1.5em; color:#FFD700;">TODAY :<span style="color:#FFFFFF;" id="fix_today_con${group.GroupId}"> 00</span></h1>
-                                        <h1 style="font-size:1.5em; color:#FFD700;">YESTERDAY :<span style="color:#FFFFFF;" id="fix_yesday_con${group.GroupId}"> 00</span></h1>
-                                        </div>
+                            if (groupName != "NA") {
+                                groupHtml = `
+                                    <div class="col-md-4 col-sm-6 col-12 p-1">
+                                        <div class="card custom-bg" style="background-color: ${color};" ondblclick="navigateToNextPage('${group.GroupId}', '${group.GroupName}')">
+                                            <div class="card-body" id="Group_${group.GroupId}">
+                                                <div style="display: flex;justify-content: center;">
+                                                <h3 style="color:#FFD700;font-size: 3em;">${group.GroupName}</h3>
+                                                </div>
+                                                <div class="consume-labels">
+                                                    <label style="font-size:1.5em;">YESTERDAY: <span id="yesterday_${group.GroupId}"></span></label>
+                                                    <label style="font-size:1.5em;">TODAY: <span id="today_${group.GroupId}"></span></label>
+                                                </div>
+                                                <div>
+                                                </div>
+                                                <div style="display: flex;justify-content: space-evenly;">
+                                                <div>
+                                                <h3 style="color:#DEF9C4;font-size: 3em;">VARIABLE</h3>
+                                                <h1 style="font-size:1.5em; color:#FFD700;">TODAY :<span style="color:#FFFFFF;" id="var_today_con${group.GroupId}"> 00</span></h1>
+                                                <h1 style="font-size:1.5em; color:#FFD700;">YESTERDAY :<span style="color:#FFFFFF;" id="var_yesday_con${group.GroupId}"> 00</span></h1>
+                                                </div>
+                                                <div>
+                                                <h3 style="color:#DEF9C4;font-size: 3em;">FIXED</h3>
+                                                <h1 style="font-size:1.5em; color:#FFD700;">TODAY :<span style="color:#FFFFFF;" id="fix_today_con${group.GroupId}"> 00</span></h1>
+                                                <h1 style="font-size:1.5em; color:#FFD700;">YESTERDAY :<span style="color:#FFFFFF;" id="fix_yesday_con${group.GroupId}"> 00</span></h1>
+                                                </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        `;
+                                `;
+                            }
                         }
 
                         row.append(groupHtml);
@@ -459,7 +463,7 @@
         var data = document.getElementById("ddlTranswise");
         var selectedOption = data.options[data.selectedIndex];
         var value = selectedOption.value;
-        
+
         $.ajax({
             type: 'POST',
             url: '@Url.Action("GetTsWData", "Home")',
@@ -512,7 +516,8 @@
     function LoadMeterData(groupId) {
         $.ajax({
             type: 'POST',
-            url: '@Url.Action("GetEnergyData", "Home")',
+            ////url: '@Url.Action("GetEnergyData", "Home")',
+            url: '@Url.Action("GetEnergyData_ReWork", "Home")',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ groupId: groupId }),
             success: function (resultData) {
@@ -570,8 +575,15 @@
         window.location.href = `@Url.Action("OverAllIndex","Home")`;
     }
 
+    function btn_TopCons() {
+        window.location.href = `@Url.Action("TotalIndex","Total")`;
+    }
+
     function navigateToNextPage(groupId, groupName) {
-        window.location.href = `@Url.Action("InduvidualStationsData", "Home")?groupId=${groupId}&groupName=${groupName}`;
+        var yesdays = document.getElementById(`yesterday_${groupId}`).innerText;
+        var todays = document.getElementById(`today_${groupId}`).innerText;
+        var vals = `${groupId},${yesdays},${todays}`;
+        window.location.href = `@Url.Action("InduvidualStationsData", "Home")?groupId=${vals}&groupName=${groupName}`;
     }
 
     //  For Toggle Menu Icons Hide Only

@@ -151,12 +151,13 @@
                 <br />
                 <br />
                 <section class="table__body">
-                    <table id="dataTable" style="background-color:lightgray" class="display">
+
+                    <table id="dataTable" style="background-color: lightgray; display: none;" class="display">
                         <!--For Specific-->
-                        <thead id="th_specific" style="display:none;">
+                        <thead>
                             <tr>
                                 <th>METER</th>
-                                <th>Date&Time</th>
+                                <th>DATE&TIME</th>
                                 <th>ACTIVEENERGY</th>
                                 <th>CONSUMPTION</th>
                                 <th>RY CURRENT</th>
@@ -167,16 +168,23 @@
                                 <th>BR VOLTAGE</th>
                                 <th>MAX DEMAND</th>
                                 <th>POWER FACTOR</th>
-                                <th><label for="export-file" id="toCSV"><img src="~/Content/assets/images/excel.png" alt="" style="height:30px;" title="Export File"></label></th>
+                                <th><label for="export-file" id="toCSV" onclick="csvExport()"><img src="~/Content/assets/images/excel.png" alt="" style="height:30px;" title="Export File"></label></th>
                             </tr>
                         </thead>
+
+                        <tbody>
+                            @* Binding From Function DownSide. *@
+                        </tbody>
+                    </table>
+
+                    <table id="dataTable1" style="background-color:lightgray" class="display">
                         <!--For OverAll-->
-                        <thead id="th_overall" style="">
+                        <thead id="th_overall">
                             <tr>
-                                <th>GROUP</th>
-                                <th>Date&Time</th>
+                                <th>GROUPNAME</th>
+                                <th>DATE&TIME</th>
                                 <th>CONSUMPTION</th>
-                                <th><label for="export-file" id="toCSV"><img src="~/Content/assets/images/excel.png" alt="" style="height:30px;" title="Export File"></label></th>
+                                <th><label for="export-file" id="toCSV1" onclick="csvExport1()"><img src="~/Content/assets/images/excel.png" alt="" style="height:30px;" title="Export File"></label></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -192,6 +200,11 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
+<script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+<link href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" rel="stylesheet" />
 <script>
     var loadCnt = 0;
     var myLineChart; // Declare a global variable for the chart instance
@@ -201,6 +214,12 @@
         if (loadCnt === 0) {
             LoadMeters('', false);
         }
+        var intTime = document.getElementById('txtInterval').value;
+        GetDataForGenerateGraph_All("ALLMETERS", "ALLGROUPS", '', '', intTime).then((labels) => {
+            if (labels != null) {
+                generateChart_All(labels);
+            }
+        });
     }
 
     const increment = parseInt(@System.Configuration.ConfigurationManager.AppSettings["DStime"]);
@@ -299,88 +318,105 @@
         }
     };
 
-function GetDataForGenerateGraph_All(selectedMeter, selectedGroup, StartDate, EndDate, TimeInterval) {
-    return new Promise((resolve, reject) => {
-        $.ajax({
-            type: 'POST',
-            url: '@Url.Action("GetOverAllIndex_Graph_All", "Graph")',
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ groupId: selectedGroup, strMeterId: selectedMeter, strFD: StartDate, strTD: EndDate, Interval: TimeInterval }),
-            success: function (response) {
-                if (response != null) {
-                    var labels = {
-                        label: response.SYNCDATETIME,
-                        datasets: [
-                            {
-                                label: 'BODY_SHOP (KWH)',
-                                data: response.BODY_SHOP_ActiveEnergy,
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                fill: false
-                            },
-                            {
-                                label: 'GENERAL_ASSEMBLY (KWH)',
-                                data: response.GENERAL_ASSEMBLY_ActiveEnergy,
-                                borderColor: 'rgba(255, 99, 132, 1)',
-                                fill: false
-                            },
-                            {
-                                label: 'HOSTED_SERVICES (KWH)',
-                                data: response.HOSTED_SERVICES_ActiveEnergy,
-                                borderColor: 'rgba(54, 162, 235, 1)',
-                                fill: false
-                            },
-                            {
-                                label: 'PAINT_SHOP (KWH)',
-                                data: response.PAINT_SHOP_ActiveEnergy,
-                                borderColor: 'rgba(255, 206, 86, 1)',
-                                fill: false
-                            },
-                            {
-                                label: 'TRANSFORMER_WISE (KWH)',
-                                data: response.TRANSFORMER_WISE_ActiveEnergy,
-                                borderColor: 'rgba(75, 192, 192, 1)',
-                                fill: false
-                            },
-                            {
-                                label: 'UTILITIES (KWH)',
-                                data: response.UTILITIES_ActiveEnergy,
-                                borderColor: 'rgba(153, 102, 255, 1)',
-                                fill: false
-                            }
-                        ]
-                    };
-                    resolve(labels);
-                } else {
-                    resolve(null);
+    function GetDataForGenerateGraph_All(selectedMeter, selectedGroup, StartDate, EndDate, TimeInterval) {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetOverAllIndex_Graph_All", "Graph")',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ groupId: selectedGroup, strMeterId: selectedMeter, strFD: StartDate, strTD: EndDate, Interval: TimeInterval }),
+                success: function (response) {
+                    if (response != null) {
+                        var labels = {
+                            label: response.SYNCDATETIME,
+                            datasets: [
+                                {
+                                    label: 'BODY_SHOP (KWH)',
+                                    data: response.BODY_SHOP_ActiveEnergy,
+                                    borderColor: 'rgba(75, 192, 192, 1)',
+                                    fill: false
+                                },
+                                {
+                                    label: 'GENERAL_ASSEMBLY (KWH)',
+                                    data: response.GENERAL_ASSEMBLY_ActiveEnergy,
+                                    borderColor: 'rgba(255, 99, 132, 1)',
+                                    fill: false
+                                },
+                                {
+                                    label: 'HOSTED_SERVICES (KWH)',
+                                    data: response.HOSTED_SERVICES_ActiveEnergy,
+                                    borderColor: 'rgba(54, 162, 235, 1)',
+                                    fill: false
+                                },
+                                {
+                                    label: 'PAINT_SHOP (KWH)',
+                                    data: response.PAINT_SHOP_ActiveEnergy,
+                                    borderColor: 'rgba(255, 206, 86, 1)',
+                                    fill: false
+                                },
+                                {
+                                    label: 'TRANSFORMER_WISE (KWH)',
+                                    data: response.TRANSFORMER_WISE_ActiveEnergy,
+                                    borderColor: 'rgba(75, 192, 192, 1)',
+                                    fill: false
+                                },
+                                {
+                                    label: 'UTILITIES (KWH)',
+                                    data: response.UTILITIES_ActiveEnergy,
+                                    borderColor: 'rgba(153, 102, 255, 1)',
+                                    fill: false
+                                }
+                            ]
+                        };
+                        resolve(labels);
+                    } else {
+                        resolve(null);
+                    }
+                },
+                error: function (error) {
+                    reject(error);
                 }
-            },
-            error: function (error) {
-                reject(error);
-            }
+            });
         });
-    });
-}
+     }
+
+    let targetLineValue = 60;//document.getElementById('targetValue').value;
+
+    function drawHorizontalLine(chartInstance, value, color) {
+        const yScale = chartInstance.scales.y;
+        const yPos = yScale.getPixelForValue(value);
+
+        chartInstance.ctx.save();
+        chartInstance.ctx.beginPath();
+        chartInstance.ctx.moveTo(chartInstance.chartArea.left, yPos);
+        chartInstance.ctx.lineTo(chartInstance.chartArea.right, yPos);
+        chartInstance.ctx.strokeStyle = color;
+        chartInstance.ctx.lineWidth = 1;
+        chartInstance.ctx.shadowColor = color;
+        chartInstance.ctx.shadowBlur = 10;
+        chartInstance.ctx.stroke();
+        chartInstance.ctx.restore();
+    }
+
     function generateChart_All(labels) {
         var ctx = document.getElementById('myLineChart').getContext('2d');
 
         if (myLineChart) {
             myLineChart.destroy(); // Destroy the existing chart instance
         }
-
         myLineChart = new Chart(ctx, {
             type: 'line',
-            data: {
-                labels: labels.label,
-                datasets: labels.datasets
-            },
+                data: {
+                    labels: labels.label,
+                    datasets: labels.datasets
+                },
             options: {
                 responsive: true,
                 scales: {
                     x: {
-                        display: true,
                         title: {
                             display: true,
-                            text: 'TIMINGS',
+                            text: 'TIMING',
                             font: {
                                 size: 20,
                                 weight: 'bold',
@@ -390,7 +426,6 @@ function GetDataForGenerateGraph_All(selectedMeter, selectedGroup, StartDate, En
                         }
                     },
                     y: {
-                        display: true,
                         title: {
                             display: true,
                             text: 'UNITS',
@@ -400,11 +435,87 @@ function GetDataForGenerateGraph_All(selectedMeter, selectedGroup, StartDate, En
                                 family: 'Arial'
                             },
                             color: 'darkblue'
+                        },
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'left',
+                        labels: {
+                            boxWidth: 20,
+                            padding: 15,
+                            font: {
+                                size: 14,
+                                family: 'Arial'
+                            },
+                            color: 'black'
+                        }
+                    },
+                    annotation: {
+                        annotations: {
+                            line1: {
+                                type: 'line',
+                                yMin: targetLineValue,
+                                yMax: targetLineValue,
+                                borderColor: 'red',
+                                borderWidth: 2,
+                                label: {
+                                    content: 'Target',
+                                    enabled: true,
+                                    position: 'end'
+                                }
+                            }
                         }
                     }
                 }
-            }
+            },
+            plugins: [{
+                id: 'targetLine',
+                afterDraw: (chart) => {
+                    drawHorizontalLine(chart, targetLineValue, '#1ecbe1');
+                }
+            }]
         });
+        //myLineChart = new Chart(ctx, {
+        //    type: 'line',
+        //    data: {
+        //        labels: labels.label,
+        //        datasets: labels.datasets
+        //    },
+        //    options: {
+        //        responsive: true,
+        //        scales: {
+        //            x: {
+        //                display: true,
+        //                title: {
+        //                    display: true,
+        //                    text: 'TIMINGS',
+        //                    font: {
+        //                        size: 20,
+        //                        weight: 'bold',
+        //                        family: 'Arial'
+        //                    },
+        //                    color: 'darkblue'
+        //                }
+        //            },
+        //            y: {
+        //                display: true,
+        //                title: {
+        //                    display: true,
+        //                    text: 'UNITS',
+        //                    font: {
+        //                        size: 20,
+        //                        weight: 'bold',
+        //                        family: 'Arial'
+        //                    },
+        //                    color: 'darkblue'
+        //                }
+        //            }
+        //        }
+        //    }
+        //});
     }
 /*function generateChart_All(labels) {
     var ctx = document.getElementById('myLineChart').getContext('2d');
@@ -573,96 +684,6 @@ function GetDataForGenerateGraph_All(selectedMeter, selectedGroup, StartDate, En
     }
 
 
-    /*function generateChart(labels) {
-        var ctx = document.getElementById('myLineChart').getContext('2d');
-
-        if (myLineChart) {
-            myLineChart.destroy(); // Destroy the existing chart instance
-        }
-
-        myLineChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: labels.label,
-                datasets: [{
-                    label: 'Active Energy',
-                    data: labels.data,
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1,
-                    fill: false
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'TIMING',
-                            font: {
-                                size: 20,
-                                weight: 'bold',
-                                family: 'Arial'
-                            },
-                            color: 'darkblue'
-                        }
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'UNITS',
-                            font: {
-                                size: 20,
-                                weight: 'bold',
-                                family: 'Arial'
-                            },
-                            color: 'darkblue'
-                        },
-                        beginAtZero: true
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'left',
-                        labels: {
-                            boxWidth: 20,
-                            padding: 15,
-                            font: {
-                                size: 14,
-                                family: 'Arial'
-                            },
-                            color: 'black'
-                        }
-                    },
-                    annotation: {
-                        annotations: {
-                            line1: {
-                                type: 'line',
-                                yMin: 5,
-                                yMax: 60,
-                                borderColor: 'red',
-                                borderWidth: 2,
-                                label: {
-                                    content: 'Target',
-                                    enabled: true,
-                                    position: 'end'
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            plugins: [{
-                id: 'targetLine',
-                afterDraw: (chart) => {
-                    drawHorizontalLine(chart, targetLineValue, '#1ecbe1');
-                }
-            }]
-        });
-
-    }*/
-
     ///Table View Scripts
     function LoadTableData_Specific(strMId, strFDate, strTDate) {
         debugger;
@@ -713,14 +734,14 @@ function GetDataForGenerateGraph_All(selectedMeter, selectedGroup, StartDate, En
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ strGroup: strGId, strFD: strFDate, strTD: strTDate }),
             success: function (response) {
-                const tableBody = document.getElementById('th_overall');
+                const tableBody = document.getElementById('#dataTable1 tbody');
                 const row = document.createElement('tr');
                 row.innerHTML = `<tr>
                     <td>${response.group}</td>
                     <td>${response.datetime}</td>
                     <td>${response.consumption}</td>
                 </tr>`;
-                tableBody.appendChild(row);                
+                tableBody.appendChild(row);
             },
             Error: function (err) {
                 alert(err);
@@ -744,8 +765,8 @@ function GetDataForGenerateGraph_All(selectedMeter, selectedGroup, StartDate, En
             //        generateChart(labels);
             //    }
             //});
-            document.getElementById('th_specific').style = '';
-            document.getElementById('th_overall').style = 'display:none;';
+            document.getElementById('dataTable').style = '';
+            document.getElementById('dataTable1').style = 'display:none;';
             LoadTableData_Specific(selectedMeter, StartDate, EndDate);
 
         } else if (selectedGroup = "ALLGROUPS") {
@@ -772,6 +793,18 @@ function GetDataForGenerateGraph_All(selectedMeter, selectedGroup, StartDate, En
         }
     };
 
+    function csvExport1() {
+        const table = document.getElementById('dataTable1');
+        const data = toCSV(table);
+        downloadXLSX(data, 'OverAll_Export');
+    }
+
+    function csvExport() {
+        const table = document.getElementById('dataTable');
+        const data = toCSV(table);
+        downloadXLSX(data, 'Specific_Export');
+    }
+
         const csv_btn = document.querySelector('#toCSV');
         const toCSV = function (table) {
             const t_heads = table.querySelectorAll('th'),
@@ -792,9 +825,9 @@ function GetDataForGenerateGraph_All(selectedMeter, selectedGroup, StartDate, En
             XLSX.utils.book_append_sheet(wb, ws, 'OverAll_Export');
             XLSX.writeFile(wb, `${fileName}.xlsx`);
         }
-        csv_btn.onclick = () => {
-            const table = document.getElementById('dataTable');
-            const data = toCSV(table);
-            downloadXLSX(data, 'OverAll_Export');
-        }
+        //csv_btn.onclick = () => {
+        //    const table = document.getElementById('dataTable');
+        //    const data = toCSV(table);
+        //    downloadXLSX(data, 'OverAll_Export');
+        //}
 </script>

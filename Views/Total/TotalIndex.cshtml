@@ -250,13 +250,13 @@
     <div class="heading">PSA | <span style="color:darkred">@Html.Raw(Name)</span> | BAR GRAPH <span style="color:darkred;">@DateTime.Now</span></div>
     <div style="display:flex; flex-direction:row; margin:10px">
         <div style="margin:10px;width:250px;">
-            <label>GROUPS</label>
+            <label class="lablell" style=" color: forestgreen; font-weight: bold;" for="FromDate">GROUPS</label>
             <select class="form-select" id="ddlGroups" onchange="ddlGroupChange()" style="margin:5px;">
             </select>
         </div>
 
-        <div style="margin: 10px; width: 250px;">
-            <label>METERS</label>
+        <div style="margin: 10px; width: 250px; display:none;">
+            <label class="lablell" style=" color: forestgreen; font-weight: bold;" for="FromDate">METERS</label>
             <select class="form-select" id="ddlMeters" @*onchange="OnSelectChanged()"*@ disabled="disabled" style="margin:5px;">
             </select>
         </div>
@@ -300,6 +300,12 @@
             if (ddlGroup != 'All') {
                 document.getElementById('ddlMeters').removeAttribute("disabled");
                 LoadMeters(ddlGroup);
+
+                var ddlGroupData = document.getElementById('ddlGroups');
+                var ddlGroupselected = ddlGroupData.options[ddlGroupData.selectedIndex];
+                var ddlGroup = ddlGroupselected.value;
+
+                BarGraphOnload(ddlGroup, '', '');
             } else {
                 document.getElementById('ddlMeters').setAttribute("disabled", "disabled");
             }

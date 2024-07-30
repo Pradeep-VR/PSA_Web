@@ -1,12 +1,224 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Pradeep\\Git-Hub\\PSA\\PSA_Web\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8E46E723-2842-4AF5-973F-4E2C9DB8CF3E}|PSAPLCDashboard.csproj|D:\\Pradeep\\Git-Hub\\PSA\\PSA_Web\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{8E46E723-2842-4AF5-973F-4E2C9DB8CF3E}|PSAPLCDashboard.csproj|solutionrelative:web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E46E723-2842-4AF5-973F-4E2C9DB8CF3E}|PSAPLCDashboard.csproj|d:\\pradeep\\git-hub\\psa\\psa_web\\views\\login\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8E46E723-2842-4AF5-973F-4E2C9DB8CF3E}|PSAPLCDashboard.csproj|solutionrelative:views\\login\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E46E723-2842-4AF5-973F-4E2C9DB8CF3E}|PSAPLCDashboard.csproj|d:\\pradeep\\git-hub\\psa\\psa_web\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8E46E723-2842-4AF5-973F-4E2C9DB8CF3E}|PSAPLCDashboard.csproj|solutionrelative:views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E46E723-2842-4AF5-973F-4E2C9DB8CF3E}|PSAPLCDashboard.csproj|d:\\pradeep\\git-hub\\psa\\psa_web\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8E46E723-2842-4AF5-973F-4E2C9DB8CF3E}|PSAPLCDashboard.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E46E723-2842-4AF5-973F-4E2C9DB8CF3E}|PSAPLCDashboard.csproj|D:\\Pradeep\\Git-Hub\\PSA\\PSA_Web\\controllers\\graphcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8E46E723-2842-4AF5-973F-4E2C9DB8CF3E}|PSAPLCDashboard.csproj|solutionrelative:controllers\\graphcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E46E723-2842-4AF5-973F-4E2C9DB8CF3E}|PSAPLCDashboard.csproj|d:\\pradeep\\git-hub\\psa\\psa_web\\views\\home\\induvidualstationsdata.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8E46E723-2842-4AF5-973F-4E2C9DB8CF3E}|PSAPLCDashboard.csproj|solutionrelative:views\\home\\induvidualstationsdata.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E46E723-2842-4AF5-973F-4E2C9DB8CF3E}|PSAPLCDashboard.csproj|d:\\pradeep\\git-hub\\psa\\psa_web\\views\\graph\\graphindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8E46E723-2842-4AF5-973F-4E2C9DB8CF3E}|PSAPLCDashboard.csproj|solutionrelative:views\\graph\\graphindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E46E723-2842-4AF5-973F-4E2C9DB8CF3E}|PSAPLCDashboard.csproj|D:\\Pradeep\\Git-Hub\\PSA\\PSA_Web\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8E46E723-2842-4AF5-973F-4E2C9DB8CF3E}|PSAPLCDashboard.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E46E723-2842-4AF5-973F-4E2C9DB8CF3E}|PSAPLCDashboard.csproj|D:\\Pradeep\\Git-Hub\\PSA\\PSA_Web\\views\\total\\totalindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8E46E723-2842-4AF5-973F-4E2C9DB8CF3E}|PSAPLCDashboard.csproj|solutionrelative:views\\total\\totalindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E46E723-2842-4AF5-973F-4E2C9DB8CF3E}|PSAPLCDashboard.csproj|d:\\pradeep\\git-hub\\psa\\psa_web\\views\\home\\overallindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8E46E723-2842-4AF5-973F-4E2C9DB8CF3E}|PSAPLCDashboard.csproj|solutionrelative:views\\home\\overallindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E46E723-2842-4AF5-973F-4E2C9DB8CF3E}|PSAPLCDashboard.csproj|D:\\Pradeep\\Git-Hub\\PSA\\PSA_Web\\controllers\\totalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8E46E723-2842-4AF5-973F-4E2C9DB8CF3E}|PSAPLCDashboard.csproj|solutionrelative:controllers\\totalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8E46E723-2842-4AF5-973F-4E2C9DB8CF3E}|PSAPLCDashboard.csproj|D:\\Pradeep\\Git-Hub\\PSA\\PSA_Web\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8E46E723-2842-4AF5-973F-4E2C9DB8CF3E}|PSAPLCDashboard.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 7,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\Pradeep\\Git-Hub\\PSA\\PSA_Web\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\Pradeep\\Git-Hub\\PSA\\PSA_Web\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AQIAABsAAAAAAAAAAAAAAC4AAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-29T12:46:31.173Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "D:\\Pradeep\\Git-Hub\\PSA\\PSA_Web\\Views\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "Views\\_ViewStart.cshtml",
+              "ToolTip": "D:\\Pradeep\\Git-Hub\\PSA\\PSA_Web\\Views\\_ViewStart.cshtml",
+              "RelativeToolTip": "Views\\_ViewStart.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-29T12:46:10.031Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "GraphIndex.cshtml",
+              "DocumentMoniker": "D:\\Pradeep\\Git-Hub\\PSA\\PSA_Web\\Views\\Graph\\GraphIndex.cshtml",
+              "RelativeDocumentMoniker": "Views\\Graph\\GraphIndex.cshtml",
+              "ToolTip": "D:\\Pradeep\\Git-Hub\\PSA\\PSA_Web\\Views\\Graph\\GraphIndex.cshtml",
+              "RelativeToolTip": "Views\\Graph\\GraphIndex.cshtml",
+              "ViewState": "AQIAAJcBAAAAAAAAAAAtwKQBAABDAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-29T12:39:17.929Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "InduvidualStationsData.cshtml",
+              "DocumentMoniker": "D:\\Pradeep\\Git-Hub\\PSA\\PSA_Web\\Views\\Home\\InduvidualStationsData.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\InduvidualStationsData.cshtml",
+              "ToolTip": "D:\\Pradeep\\Git-Hub\\PSA\\PSA_Web\\Views\\Home\\InduvidualStationsData.cshtml",
+              "RelativeToolTip": "Views\\Home\\InduvidualStationsData.cshtml",
+              "ViewState": "AQIAAGUCAAAAAAAAAAAowHQCAAA2AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-29T11:11:54.332Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "TotalController.cs",
+              "DocumentMoniker": "D:\\Pradeep\\Git-Hub\\PSA\\PSA_Web\\Controllers\\TotalController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TotalController.cs",
+              "ToolTip": "D:\\Pradeep\\Git-Hub\\PSA\\PSA_Web\\Controllers\\TotalController.cs",
+              "RelativeToolTip": "Controllers\\TotalController.cs",
+              "ViewState": "AQIAABoAAAAAAAAAAAAswCAAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-29T09:26:15.852Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "TotalIndex.cshtml",
+              "DocumentMoniker": "D:\\Pradeep\\Git-Hub\\PSA\\PSA_Web\\Views\\Total\\TotalIndex.cshtml",
+              "RelativeDocumentMoniker": "Views\\Total\\TotalIndex.cshtml",
+              "ToolTip": "D:\\Pradeep\\Git-Hub\\PSA\\PSA_Web\\Views\\Total\\TotalIndex.cshtml",
+              "RelativeToolTip": "Views\\Total\\TotalIndex.cshtml",
+              "ViewState": "AQIAAOYAAAAAAAAAAAAAADMBAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-29T09:24:36.277Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "GraphController.cs",
+              "DocumentMoniker": "D:\\Pradeep\\Git-Hub\\PSA\\PSA_Web\\Controllers\\GraphController.cs",
+              "RelativeDocumentMoniker": "Controllers\\GraphController.cs",
+              "ToolTip": "D:\\Pradeep\\Git-Hub\\PSA\\PSA_Web\\Controllers\\GraphController.cs",
+              "RelativeToolTip": "Controllers\\GraphController.cs",
+              "ViewState": "AQIAADYCAAAAAAAAAAAkwEcCAABRAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-29T07:00:01.5Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Web.config",
+              "DocumentMoniker": "D:\\Pradeep\\Git-Hub\\PSA\\PSA_Web\\Web.config",
+              "RelativeDocumentMoniker": "Web.config",
+              "ToolTip": "D:\\Pradeep\\Git-Hub\\PSA\\PSA_Web\\Web.config",
+              "RelativeToolTip": "Web.config",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2024-07-29T06:22:34.804Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "OverAllIndex.cshtml",
+              "DocumentMoniker": "D:\\Pradeep\\Git-Hub\\PSA\\PSA_Web\\Views\\Home\\OverAllIndex.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\OverAllIndex.cshtml",
+              "ToolTip": "D:\\Pradeep\\Git-Hub\\PSA\\PSA_Web\\Views\\Home\\OverAllIndex.cshtml",
+              "RelativeToolTip": "Views\\Home\\OverAllIndex.cshtml",
+              "ViewState": "AQIAANECAAAAAAAAAAAtwOcCAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-29T08:44:39.251Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Pradeep\\Git-Hub\\PSA\\PSA_Web\\Views\\Login\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Login\\Index.cshtml",
+              "ToolTip": "D:\\Pradeep\\Git-Hub\\PSA\\PSA_Web\\Views\\Login\\Index.cshtml",
+              "RelativeToolTip": "Views\\Login\\Index.cshtml",
+              "ViewState": "AQIAACQAAAAAAAAAAAAAAC4AAABbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-29T12:47:37.538Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\Pradeep\\Git-Hub\\PSA\\PSA_Web\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
+              "ToolTip": "D:\\Pradeep\\Git-Hub\\PSA\\PSA_Web\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Controllers\\HomeController.cs",
+              "ViewState": "AQIAAHEAAAAAAAAAAAAYwIIAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-29T07:29:38.308Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Pradeep\\Git-Hub\\PSA\\PSA_Web\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
+              "ToolTip": "D:\\Pradeep\\Git-Hub\\PSA\\PSA_Web\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Views\\Home\\Index.cshtml",
+              "ViewState": "AQIAAPMAAAAAAAAAAAAAAP8AAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-29T07:28:58.632Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -24,51 +24,51 @@ namespace Kubota.Web.Dashboard.Controllers
         }
 
         HomeController _Home = new HomeController();
-
+        
         [HttpPost]
-        public JsonResult GetGroupsData(string strGroup,string strStartD,string strEndD)
+        public JsonResult GetGroupsData(string strGroup, string strStartD, string strEndD)
         {
             var stratDate = DateTime.Now;
             var endDate = DateTime.Now;
             var Consumption = "";
+
             List<string> GroupName = new List<string>();
             List<string> GroupCons = new List<string>();
+
             if (strStartD != "" && strEndD != "")
             {
-                stratDate = DateTime.Parse(strStartD);//.ToString("yyyy-MM-dd hh:mm:ss");
-                endDate = DateTime.Parse(strEndD);//.ToString("yyyy-MM-dd hh:mm:ss");     
+                stratDate = DateTime.Parse(strStartD);
+                endDate = DateTime.Parse(strEndD);
             }
             else
             {
                 stratDate = DateTime.Today;
                 endDate = DateTime.Today.AddDays(1).AddTicks(-1);
             }
-            
-            if(strGroup != "All")
+
+            if (strGroup != "All")
             {
                 decimal SpeCons = 0;
-                string Qry1 = "SELECT METERID,METERNAME FROM METERMASTER WHERE GROUPID='" + strGroup + "' AND FLAG = 1;";
+                string Qry1 = "SELECT METERID, METERNAME FROM METERMASTER WHERE GROUPID='" + strGroup + "' AND FLAG = 1;";
                 var meters = _serve.GetDataTable(Qry1);
+
                 if (meters.Rows.Count > 0)
                 {
                     for (int j = 0; j < meters.Rows.Count; j++)
                     {
                         string meter = meters.Rows[j]["METERID"].ToString();
                         Consumption = _Home.GetConsumptions(meter, stratDate.ToString(), endDate.ToString(), "M");
-
                         var cons = Consumption == "" ? "0" : Consumption;
-                        SpeCons = SpeCons + Convert.ToDecimal(cons);
+                        SpeCons += Convert.ToDecimal(cons);
 
                         GroupName.Add(meters.Rows[j]["METERNAME"].ToString());
                         GroupCons.Add(SpeCons.ToString("0.00"));
                     }
-
                 }
-                
             }
             else
             {
-                string Qry = "SELECT GROUPID,GROUPNAME FROM GROUPMASTER WHERE FLAG=1;";
+                string Qry = "SELECT GROUPID, GROUPNAME FROM GROUPMASTER WHERE FLAG=1;";
                 var dt = _serve.GetDataTable(Qry);
                 if (dt.Rows.Count > 0)
                 {
@@ -76,35 +76,44 @@ namespace Kubota.Web.Dashboard.Controllers
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
                         string group = dt.Rows[i]["GROUPID"].ToString();
-
-                        string Qry1 = "SELECT METERID,METERNAME FROM METERMASTER WHERE GROUPID='" + group + "' AND FLAG = 1;";
+                        string Qry1 = "SELECT METERID, METERNAME FROM METERMASTER WHERE GROUPID='" + group + "' AND FLAG = 1;";
                         var meters = _serve.GetDataTable(Qry1);
+
                         if (meters.Rows.Count > 0)
                         {
                             for (int j = 0; j < meters.Rows.Count; j++)
                             {
                                 string meter = meters.Rows[j]["METERID"].ToString();
                                 Consumption = _Home.GetConsumptions(meter, stratDate.ToString(), endDate.ToString(), "M");
-
                                 var cons = Consumption == "" ? "0" : Consumption;
-                                SpeCons = SpeCons + Convert.ToDecimal(cons);
+                                SpeCons += Convert.ToDecimal(cons);
                             }
-
                         }
+
                         GroupName.Add(dt.Rows[i]["GROUPNAME"].ToString());
                         GroupCons.Add(SpeCons.ToString("0.00"));
                     }
                 }
             }
-            
-            
+
+            // Combine GroupName and GroupCons into tuples and sort
+            var combinedList = GroupName.Zip(GroupCons, (name, cons) => new { Name = name, Cons = cons })
+                                        .OrderByDescending(x => x.Cons)                                        
+                                        .ToList();
+
+            // Separate the sorted data back into GroupName and GroupCons
+            GroupName = combinedList.Select(x => x.Name).ToList();
+            GroupCons = combinedList.Select(x => x.Cons).ToList();
+
             var res = new
             {
                 groupname = GroupName.ToArray(),
                 groupcons = GroupCons.ToArray(),
             };
+
             return Json(res);
         }
+
 
         [HttpPost]
         public JsonResult GetMetersReadings(string strId, string strFDate, string strTDate)
